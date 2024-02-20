@@ -19,75 +19,74 @@
 
 </div>
 
-这是 
-[**Simple Robot v4**](https://github.com/simple-robot/simpler-robot/tree/v4-dev)
-下的子项目，是针对 
-[**Discord Bot**](https://discord.com/developers/docs/intro) 
-各方面的 simbot 组件库实现， 
-包括对 `API` 内容的实现、事件相关的实现以及BOT对于事件的监听与交互等。
+[中文](README_CN.md) | _English_
 
-Discord Component 可以作为底层API依赖使用、
-轻量级的 Discord 事件调度框架使用，
-也可以基于 simbot 核心库的种种快速开发一个功能强大的 Discord Bot！
+> This content is machine-translated.
 
-- 基于 [`Kotlin`](https://kotlinlang.org/) 提供 [KMP 多平台](https://kotlinlang.org/docs/multiplatform.html) 特性
-- 基于 [`Kotlin coroutines`](https://github.com/Kotlin/kotlinx.coroutines) 与 [`Ktor`](https://ktor.io/) 提供高效易用的API；
+This is a subproject of  
+[**Simple Robot v4**][simbot4 gh] (simbot),
+which is a simbot component library implementation for 
+[**Discord Bot**][discord bot doc].
+This includes the implementation of the API, 
+the implementation of events and the bots listening and interaction with events.
 
-- 基于 [`Kotlin`](https://kotlinlang.org/) 提供 [KMP 多平台](https://kotlinlang.org/docs/multiplatform.html) 特性，提供 Java 友好的API。
-- 基于 [`Kotlin coroutines`](https://github.com/Kotlin/kotlinx.coroutines) 与 [`Ktor`](https://ktor.io/) 提供轻量高效的API。
+The Discord Component can be used as a low-level API dependency,
+The lightweight Discord event scheduling framework uses,
+It is also possible to quickly develop a powerful Discord Bot based on the simbot core library!
 
-> [!Note]
-> 下文中 `Simple Robot v4` 简称为 `simbot4`
+- Based on [`Kotlin`](https://kotlinlang.org/) and [KMP][KMP], and provide friendly Java API.
+- Based on [`Kotlin coroutines`](https://github.com/Kotlin/kotlinx.coroutines) and [`Ktor`](https://ktor.io/) provides efficient and easy to use API;
 
-## 文档
+## Documentation
 
-- 了解simbot: [**Simple Robot 应用手册**](https://simbot.forte.love)
-- **Discord组件**手册：(待建设)
-- **API文档**: [**文档引导站点**](https://docs.simbot.forte.love) 中 Discord 的 [**KDoc站点**](https://docs.simbot.forte.love/components/discord)
+- Learn about simbot: [**The Simple Robot Reference Manual**][simbot doc]
+- **Discord Component** Reference Manual: (to be built)
+- **API Documentation**: [**The KDoc of Discord Component**](https://docs.simbot.forte.love/components/discord) in the [**document guide site**](https://docs.simbot.forte.love). 
 
 ---
 
-我们欢迎并期望着您的
-[反馈](https://github.com/simple-robot/simbot-component-discord/issues) 
-或 
-[协助](https://github.com/simple-robot/simbot-component-discord/pulls)，
-感谢您的贡献与支持！
+We welcome you and look forward to it
+[feed back](https://github.com/simple-robot/simbot-component-discord/issues)
+or
+[pull request](https://github.com/simple-robot/simbot-component-discord/pulls),
+Thank you for your contribution and support!
 
 ## 模块引导
+### API module
 
-### API模块
+Based on `Ktor`'s [KMP][KMP] implementation for [Discord API][discord bot doc],
+is a simple, efficient and lightweight API implementation module.
 
-基于 `Ktor` 针对 [Discord API](https://discord.com/developers/docs/intro) 
-的基本完整的[KMP](https://kotlinlang.org/docs/multiplatform.html)多平台封装实现，
-是一个简单高效轻量级的API实现模块。
+This module provides very little extra implementation.
+The goal is to preserve the feel of the original API as much as possible without overwrapping it.
 
-此模块基本不会提供什么多余的实现，其目标为在提供封装的情况下尽可能地保留原始API的使用手感，不做过多的封装。
+👉 [Go to Modules](simbot-component-discord-api) to learn more.
 
-👉 [前往模块](simbot-component-discord-api) 了解更多。
+### Stdlib module
 
-### 标准库模块
+Based on [API module](simbot-component-discord-api), 
+for the implementation of authentication, subscription events and other related functions in bot.
 
-基于 [API模块](simbot-component-discord-api) 针对bot的"登录"鉴权实现简单高效轻量级的事件订阅功能。
+This module provides an implementation of event-related functionality based on the API module, 
+including the ability to subscribe to events.
 
-此模块在API模块的基础上提供了针对事件相关的功能实现，包括事件订阅的能力。
-同样的，其目标为在提供封装的情况下尽可能地保留原始API的使用手感，不做过多的封装。
+Again, the goal is to provide as much of the feel of the original API as possible without overwrapping it.
 
-👉 [前往模块](simbot-component-discord-stdlib) 了解更多。
+👉 [Go to Modules](simbot-component-discord-stdlib) to learn more.
 
-### 核心组件模块
+### Core Component module
 
-基于 
-[标准库模块](simbot-component-discord-stdlib) 
-对 [simbot4核心库](https://github.com/simple-robot/simpler-robot) 
-的组件实现，
-是一个相对高度封装的模块，并提供simbot4大部分能力，包括事件监听、多组件协同、Spring Boot Starter 等。
+A component implementation of the [simbot4 core library][simbot4 gh] based on [standard library module](simbot-component-discord-stdlib).
 
-👉 [前往模块](simbot-component-discord-core) 了解更多。
+Is a relatively highly encapsulated module that provides most of the capabilities of simbot4, 
+including event listeners, multi-component coordination, Spring Boot starter, and more.
+
+👉 [Go to Modules](simbot-component-discord-core) to learn more.
 
 
 ## License
 
-`simbot-component-discord` 使用 `LGPLv3` 许可证开源。
+`simbot-component-discord` is open source under the `LGPLv3` licence。
 
 ```
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General 
@@ -102,3 +101,7 @@ You should have received a copy of the GNU Lesser General Public License along w
 If not, see <https://www.gnu.org/licenses/>.
 ```
 
+[simbot4 gh]: https://github.com/simple-robot/simpler-robot/tree/v4-dev
+[simbot doc]: https://simbot.forte.love
+[discord bot doc]: https://discord.com/developers/docs/intro
+[KMP]: https://kotlinlang.org/docs/multiplatform.html
