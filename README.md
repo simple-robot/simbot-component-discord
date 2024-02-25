@@ -46,15 +46,7 @@ It is also possible to quickly develop a powerful Discord Bot based on the simbo
 - **Discord Component** Reference Manual: (to be built)
 - **API Documentation**: [**The KDoc of Discord Component**](https://docs.simbot.forte.love/components/discord) in the [**document guide site**](https://docs.simbot.forte.love). 
 
----
-
-We welcome you and look forward to it
-[feed back](https://github.com/simple-robot/simbot-component-discord/issues)
-or
-[pull request](https://github.com/simple-robot/simbot-component-discord/pulls),
-Thank you for your contribution and support!
-
-## 模块引导
+## Modules
 ### API module
 
 Based on `Ktor`'s [KMP][KMP] implementation for [Discord API][discord bot doc],
@@ -86,6 +78,15 @@ including event listeners, multi-component coordination, Spring Boot starter, an
 
 👉 [Go to Modules](simbot-component-discord-core) to learn more.
 
+## CONTRIBUTING
+
+See [CONTRIBUTING.md](docs/CONTRIBUTING.md) for more information! 
+
+We welcome you and look forward to it
+[feed back](https://github.com/simple-robot/simbot-component-discord/issues)
+or
+[pull request](https://github.com/simple-robot/simbot-component-discord/pulls),
+Thank you for your contribution and support!
 
 ## License
 
