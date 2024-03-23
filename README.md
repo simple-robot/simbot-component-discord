@@ -46,9 +46,10 @@ It is also possible to quickly develop a powerful Discord Bot based on the simbo
 
 ## Documentation
 
-- Learn about simbot: [**The Simple Robot Reference Manual**][simbot doc]
 - **Discord Component** Reference Manual: (to be built)
+- Learn about simbot: [**The Simple Robot Reference Manual**][simbot doc]
 - **API Documentation**: [**The KDoc of Discord Component**](https://docs.simbot.forte.love/components/discord) in the [**document guide site**](https://docs.simbot.forte.love). 
+- [**Communities**](https://simbot.forte.love/communities.html): Have fun interacting with us and other developers!
 
 ## Modules
 ### API module

@@ -47,9 +47,10 @@ Discord Component 可以作为底层API依赖使用、
 
 ## 文档
 
-- 了解simbot: [**Simple Robot 应用手册**](https://simbot.forte.love)
 - **Discord组件**手册：(待建设)
+- 了解simbot: [**Simple Robot 应用手册**](https://simbot.forte.love)
 - **API文档**: [**文档引导站点**](https://docs.simbot.forte.love) 中 Discord 的 [**KDoc站点**](https://docs.simbot.forte.love/components/discord)
+- [**社群**](https://simbot.forte.love/communities.html): 与我们和其他开发者愉快地交流！
 
 ## 模块引导
 
