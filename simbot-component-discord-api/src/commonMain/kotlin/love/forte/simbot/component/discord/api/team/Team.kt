@@ -15,5 +15,5 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-package love.forte.simbot.discord.api.user
+package love.forte.simbot.component.discord.api.team
 

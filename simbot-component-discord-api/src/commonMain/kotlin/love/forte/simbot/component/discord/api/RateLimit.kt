@@ -15,10 +15,12 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-package love.forte.simbot.discord.api
+package love.forte.simbot.component.discord.api
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
 
 /**
  * The [Rate Limits](https://discord.com/developers/docs/topics/rate-limits#rate-limits).
@@ -118,8 +120,19 @@ public interface RateLimit {
          */
         public const val RATE_LIMIT_SCOPE: String = "X-RateLimit-Scope"
 
+        /**
+         * The `user` scope of [RATE_LIMIT_SCOPE].
+         */
         public const val RATE_LIMIT_SCOPE_USER: String = "user"
+
+        /**
+         * The `global` scope of [RATE_LIMIT_SCOPE].
+         */
         public const val RATE_LIMIT_SCOPE_GLOBAL: String = "global"
+
+        /**
+         * The `shared` scope of [RATE_LIMIT_SCOPE].
+         */
         public const val RATE_LIMIT_SCOPE_SHARED: String = "shared"
     }
 }
@@ -128,7 +141,7 @@ public interface RateLimit {
 /**
  * [Rate Limit Response Structure](https://discord.com/developers/docs/topics/rate-limits#exceeding-a-rate-limit-rate-limit-response-structure)
  *
- * In the case that a rate limit is exceeded, the API will return a HTTP 429 response code with a JSON body.
+ * In the case that a rate limit is exceeded, the API will return an HTTP 429 response code with a JSON body.
  * Your application should rely on the `Retry-After` header or `retry_after` field to determine when to retry the request.
  *
  * @property message A message saying you are being rate limited.
@@ -139,9 +152,28 @@ public interface RateLimit {
  */
 @Serializable
 public data class RateLimitResponse(
-    val message: String,
+    val message: String = "",
     @SerialName("retry_after")
-    val retryAfter: Float,
+    val retryAfter: Double = 0.0,
     val global: Boolean = false,
     val code: Int? = null,
 )
+
+/**
+ * The duration to wait before submitting another request.
+ * @see RateLimitResponse.retryAfter
+ */
+public val RateLimitResponse.retryAfterDuration: Duration
+    get() = retryAfter.seconds
+
+
+@Serializable
+internal data class RateLimitData(
+    override val bucket: String,
+    override val limit: Int,
+    override val remaining: Int,
+    override val reset: Int,
+    override val resetAfter: Double,
+    override val global: String,
+    override val scope: String
+) : RateLimit

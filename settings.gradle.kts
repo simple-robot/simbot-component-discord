@@ -42,4 +42,5 @@ pluginManagement {
     }
 }
 
+include(":simbot-component-discord-common")
 include(":simbot-component-discord-api")

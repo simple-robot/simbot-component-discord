@@ -15,22 +15,5 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-package love.forte.simbot.discord.api
-
-import io.ktor.http.*
-import kotlinx.serialization.DeserializationStrategy
-import love.forte.simbot.common.apidefinition.ApiDefinition
-
-
-/**
- * An API definition of discord API.
- *
- * @author ForteScarlet
- */
-public interface DiscordApi<R : Any> : ApiDefinition<R> {
-    override val body: Any?
-    override val method: HttpMethod
-    override val resultDeserializationStrategy: DeserializationStrategy<R>
-    override val url: Url
-}
+package love.forte.simbot.component.discord.api.user
 
