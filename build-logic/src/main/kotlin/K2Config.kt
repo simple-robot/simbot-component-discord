@@ -15,39 +15,9 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-
-plugins {
-    `kotlin-dsl`
+import org.gradle.api.Project
+@Deprecated("K2 is already enabled by default")
+@Suppress("UNUSED_PARAMETER", "UnusedReceiverParameter")
+fun Project.useK2(languageVersion: String = "2.0") {
+    // Nothing.
 }
-
-repositories {
-    mavenCentral()
-    gradlePluginPortal()
-    mavenLocal()
-}
-
-val kotlinVersion: String = libs.versions.kotlin.get()
-
-dependencies {
-    implementation(kotlin("gradle-plugin", kotlinVersion))
-    implementation(kotlin("serialization", kotlinVersion))
-    implementation(libs.bundles.dokka)
-
-    // see https://github.com/gradle-nexus/publish-plugin
-    implementation("io.github.gradle-nexus:publish-plugin:1.1.0")
-
-    // simbot suspend transform gradle common
-    implementation(libs.simbot.gradle)
-
-    // suspend transform
-    implementation(libs.suspend.transform.gradle)
-
-    // gradle common
-    implementation(libs.bundles.gradle.common)
-}
-
-//tasks.withType<KotlinCompile> {
-//    kotlinOptions {
-//        languageVersion = "2.0"
-//    }
-//}

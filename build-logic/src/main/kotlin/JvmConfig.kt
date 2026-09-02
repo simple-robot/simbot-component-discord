@@ -26,17 +26,16 @@ import org.gradle.process.CommandLineArgumentProvider
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
-import org.jetbrains.kotlin.gradle.dsl.KotlinTopLevelExtension
+import org.jetbrains.kotlin.gradle.dsl.JvmDefaultMode
+import org.jetbrains.kotlin.gradle.dsl.KotlinBaseExtension
 import org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget
 
 
 inline fun KotlinJvmTarget.configJava(crossinline block: KotlinJvmTarget.() -> Unit = {}) {
-    withJava()
-    compilations.all {
-        kotlinOptions {
-            javaParameters = true
-            freeCompilerArgs = freeCompilerArgs + listOf("-Xjvm-default=all")
-        }
+    compilerOptions {
+        javaParameters.set(true)
+        freeCompilerArgs.add("-Xjsr305=strict")
+        jvmDefault.set(JvmDefaultMode.NO_COMPATIBILITY)
     }
 
     testRuns["test"].executionTask.configure {
@@ -46,7 +45,7 @@ inline fun KotlinJvmTarget.configJava(crossinline block: KotlinJvmTarget.() -> U
 }
 
 
-fun KotlinTopLevelExtension.configJavaToolchain(jdkVersion: Int) {
+fun KotlinBaseExtension.configJavaToolchain(jdkVersion: Int) {
     jvmToolchain(jdkVersion)
 }
 
@@ -68,8 +67,7 @@ inline fun KotlinJvmProjectExtension.configKotlinJvm(
     compilerOptions {
         javaParameters = true
         jvmTarget.set(JvmTarget.fromTarget(jdkVersion.toString()))
-        // freeCompilerArgs.addAll("-Xjvm-default=all", "-Xjsr305=strict")
-        freeCompilerArgs.set(freeCompilerArgs.getOrElse(emptyList()) + listOf("-Xjvm-default=all", "-Xjsr305=strict"))
+        freeCompilerArgs.add("-Xjsr305=strict")
     }
     block()
 }
@@ -87,7 +85,8 @@ inline fun Project.configJavaCompileWithModule(
         if (moduleName != null) {
             options.compilerArgumentProviders.add(CommandLineArgumentProvider {
                 // Provide compiled Kotlin classes to javac – needed for Java/Kotlin mixed sources to work
-                listOf("--patch-module", "$moduleName=${sourceSets["main"].output.asPath}")
+                val sourceSet = javaSourceSets.findByName("main") ?: javaSourceSets.findByName("jvmMain")
+                listOf("--patch-module", "$moduleName=${sourceSet?.output?.asPath.orEmpty()}")
             })
         }
 
@@ -96,5 +95,5 @@ inline fun Project.configJavaCompileWithModule(
 }
 
 @PublishedApi
-internal val Project.sourceSets: SourceSetContainer
+internal val Project.javaSourceSets: SourceSetContainer
     get() = extensions.getByName<SourceSetContainer>("sourceSets")

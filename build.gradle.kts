@@ -20,9 +20,9 @@ import love.forte.gradle.common.core.repository.Repositories
 
 plugins {
     idea
-    `simbot-discord-changelog-generator`
-    `simbot-discord-dokka-multi-module`
-    `simbot-discord-nexus-publish`
+    id("simbot-discord-changelog-generator")
+    id("simbot-discord-dokka-multi-module")
+    id("simbot-discord-nexus-publish")
 }
 
 setup(P.ComponentDiscord)

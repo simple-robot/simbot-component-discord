@@ -15,36 +15,20 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-import love.forte.simbot.gradle.suspendtransforms.SuspendTransforms
+import love.forte.plugin.suspendtrans.gradle.SuspendTransformPluginExtension
+import org.gradle.kotlin.dsl.configure
 
 plugins {
     id("love.forte.plugin.suspend-transform")
 }
 
-suspendTransform {
+extensions.configure<SuspendTransformPluginExtension>("suspendTransformPlugin") {
     includeRuntime = false
     includeAnnotation = false
 
-    addJvmTransformers(
-        // @JvmBlocking
-        SuspendTransforms.jvmBlockingTransformer,
-        // @JvmAsync
-        SuspendTransforms.jvmAsyncTransformer,
-
-        // @JvmSuspendTrans
-        SuspendTransforms.suspendTransTransformerForJvmBlocking,
-        SuspendTransforms.suspendTransTransformerForJvmAsync,
-        SuspendTransforms.suspendTransTransformerForJvmReserve,
-
-        // @JvmSuspendTransProperty
-        SuspendTransforms.jvmSuspendTransPropTransformerForBlocking,
-        SuspendTransforms.jvmSuspendTransPropTransformerForAsync,
-        SuspendTransforms.jvmSuspendTransPropTransformerForReserve,
-    )
+    addSimbotJvmTransforms()
 
     // addJsTransformers(
     //     SuspendTransforms.suspendTransTransformerForJsPromise,
     // )
 }
-
-

@@ -15,7 +15,8 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-// https://stackoverflow.com/questions/67795324/gradle7-version-catalog-how-to-use-it-with-buildsrc
+rootProject.name = "build-logic"
+
 dependencyResolutionManagement {
     versionCatalogs {
         create("libs") {

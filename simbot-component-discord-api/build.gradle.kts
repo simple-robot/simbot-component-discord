@@ -19,19 +19,16 @@ import love.forte.gradle.common.core.project.setup
 import love.forte.gradle.common.kotlin.multiplatform.applyTier1
 import love.forte.gradle.common.kotlin.multiplatform.applyTier2
 import love.forte.gradle.common.kotlin.multiplatform.applyTier3
-import love.forte.plugin.suspendtrans.gradle.withKotlinTargets
-import util.isCi
 
 plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
-    `simbot-discord-dokka-partial-configure`
+    id("simbot-discord-dokka-partial-configure")
     // alias(libs.plugins.ksp)
 }
 
 setup(P.ComponentDiscord)
 
-useK2()
 configJavaCompileWithModule("simbot.component.discord.api")
 apply(plugin = "simbot-discord-multiplatform-maven-publish")
 
@@ -41,28 +38,15 @@ kotlin {
     explicitApi()
     applyDefaultHierarchyTemplate()
 
-    sourceSets.configureEach {
-        languageSettings {
-            optIn("love.forte.simbot.qguild.QGInternalApi")
-        }
-    }
-
     configKotlinJvm()
 
-    js(IR) {
+    js {
         configJs()
     }
 
     applyTier1()
     applyTier2()
     applyTier3(supportKtorClient = true)
-
-    withKotlinTargets { target ->
-        targets.findByName(target.name)?.compilations?.all {
-            // 'expect'/'actual' classes (including interfaces, objects, annotations, enums, and 'actual' typealiases) are in Beta. You can use -Xexpect-actual-classes flag to suppress this warning. Also see: https://youtrack.jetbrains.com/issue/KT-61573
-            kotlinOptions.freeCompilerArgs += "-Xexpect-actual-classes"
-        }
-    }
 
     sourceSets {
         commonMain.dependencies {
@@ -72,7 +56,7 @@ kotlin {
             api(libs.simbot.common.apidefinition)
             api(libs.simbot.common.suspend)
             api(libs.simbot.common.core)
-            compileOnly(libs.simbot.common.annotations)
+            api(libs.simbot.common.annotations)
 
             api(libs.ktor.client.core)
             api(libs.ktor.client.contentNegotiation)
@@ -81,14 +65,9 @@ kotlin {
 
         commonTest.dependencies {
             implementation(kotlin("test"))
-            implementation(libs.kotlinx.coroutines.debug)
             implementation(libs.kotlinx.coroutines.test)
             // https://ktor.io/docs/http-client-testing.html
             implementation(libs.ktor.client.mock)
-        }
-
-        jvmMain.dependencies {
-//            compileOnly(libs.simbot.api) // use @Api4J annotation
         }
 
         jvmTest.dependencies {
@@ -98,15 +77,11 @@ kotlin {
             implementation(libs.log4j.slf4j2)
             implementation(libs.kotlinx.coroutines.reactor)
             implementation(libs.reactor.core)
+            implementation(libs.kotlinx.coroutines.debug)
         }
 
         jsMain.dependencies {
             api(libs.ktor.client.js)
-            implementation(libs.simbot.common.annotations)
-        }
-
-        nativeMain.dependencies {
-            implementation(libs.simbot.common.annotations)
         }
 
         mingwTest.dependencies {

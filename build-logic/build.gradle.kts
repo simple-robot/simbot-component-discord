@@ -15,15 +15,36 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-import org.gradle.api.Project
-import org.gradle.kotlin.dsl.withType
 
-
-fun Project.useK2(languageVersion: String = "2.0") {
-    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-        kotlinOptions {
-            // useK2
-            this.languageVersion = languageVersion
-        }
-    }
+plugins {
+    `kotlin-dsl`
 }
+
+repositories {
+    mavenCentral()
+    gradlePluginPortal()
+    mavenLocal()
+}
+
+val kotlinVersion: String = libs.versions.kotlin.get()
+
+dependencies {
+    implementation(kotlin("gradle-plugin", kotlinVersion))
+    implementation(kotlin("serialization", kotlinVersion))
+    implementation(libs.dokka.plugin)
+
+    // see https://github.com/gradle-nexus/publish-plugin
+    implementation("io.github.gradle-nexus:publish-plugin:2.0.0")
+
+    // suspend transform
+    implementation(libs.suspend.transform.gradle)
+
+    // gradle common
+    implementation(libs.bundles.gradle.common)
+}
+
+//tasks.withType<KotlinCompile> {
+//    kotlinOptions {
+//        languageVersion = "2.0"
+//    }
+//}

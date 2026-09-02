@@ -31,7 +31,7 @@ setup(P.ComponentDiscord)
 val p = project
 multiplatformConfigPublishing {
     project = P.ComponentDiscord
-    isSnapshot = project.version.toString().contains("SNAPSHOT", true)
+    isSnapshot = p.version.toString().contains("SNAPSHOT", true)
 
     val jarJavadoc by tasks.registering(Jar::class) {
         group = "documentation"

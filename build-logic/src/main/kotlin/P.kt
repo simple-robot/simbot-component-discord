@@ -16,10 +16,7 @@
  */
 
 import love.forte.gradle.common.core.project.ProjectDetail
-import love.forte.gradle.common.core.project.Version
-import love.forte.gradle.common.core.project.minus
 import love.forte.gradle.common.core.property.systemProp
-import love.forte.gradle.common.core.project.version as v
 
 
 const val SIMBOT_GROUP = "love.forte.simbot"
@@ -43,10 +40,9 @@ object P {
         override val homepage: String get() = HOMEPAGE
 
 
-        private val baseVersion = v(0, 0, 1)
+        private const val baseVersion = "0.0.1"
 
-        val snapshotVersion = baseVersion - Version.SNAPSHOT
-        override val version = if (isSnapshot()) snapshotVersion else baseVersion
+        override val version: String = if (isSnapshot()) "$baseVersion-SNAPSHOT" else baseVersion
 
         override val developers: List<Developer> = developers {
             developer {
