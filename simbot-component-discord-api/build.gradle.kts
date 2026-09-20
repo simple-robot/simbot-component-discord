@@ -50,6 +50,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            api(project(":simbot-component-discord-common"))
             api(libs.kotlinx.coroutines.core)
 
             api(libs.simbot.logger)

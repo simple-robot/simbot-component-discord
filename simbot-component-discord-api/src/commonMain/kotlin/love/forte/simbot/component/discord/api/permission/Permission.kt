@@ -17,9 +17,7 @@
 
 package love.forte.simbot.component.discord.api.permission
 
-import love.forte.simbot.component.discord.api.permission.DiscordPermissionChannelType.STAGE
-import love.forte.simbot.component.discord.api.permission.DiscordPermissionChannelType.TEXT
-import love.forte.simbot.component.discord.api.permission.DiscordPermissionChannelType.VOICE
+import love.forte.simbot.component.discord.api.permission.DiscordPermissionChannelType.*
 import kotlin.jvm.JvmExposeBoxed
 
 /**
@@ -27,9 +25,9 @@ import kotlin.jvm.JvmExposeBoxed
  * @author Forte Scarlet
  */
 @OptIn(ExperimentalStdlibApi::class)
-public enum class DiscordPermission(
+public enum class Permission(
     @get:JvmExposeBoxed
-    public val flag: DiscordPermissionFlag,
+    public val flag: Permissions,
     /**
      * Channel types for which Discord lists this permission. An empty set
      * means that the official table does not associate the permission with a
@@ -315,7 +313,7 @@ public enum class DiscordPermission(
     ;
 
     constructor(flag: Long, vararg channelTypes: DiscordPermissionChannelType) :
-            this(DiscordPermissionFlag(flag), channelTypes.toSet())
+            this(Permissions.of(flag), channelTypes.toSet())
 
     /**
      * The [Long] value of [flag].

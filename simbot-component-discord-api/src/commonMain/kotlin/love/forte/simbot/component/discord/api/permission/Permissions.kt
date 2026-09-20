@@ -17,8 +17,16 @@
 
 package love.forte.simbot.component.discord.api.permission
 
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotlin.jvm.JvmExposeBoxed
 import kotlin.jvm.JvmInline
+import kotlin.jvm.JvmStatic
 
 /**
  * A Discord permission bit field.
@@ -26,20 +34,31 @@ import kotlin.jvm.JvmInline
  * [plus] combines flags, [minus] removes flags, and [contains] checks whether
  * another flag is included in this bit field.
  *
- * @see DiscordPermission
+ * @see Permission
  * @see [Discord permissions](https://docs.discord.com/developers/topics/permissions)
  * @author Forte Scarlet
  */
 @OptIn(ExperimentalStdlibApi::class)
 @JvmExposeBoxed
 @JvmInline
-public value class DiscordPermissionFlag(public val value: Long) {
+@Serializable(with = DiscordPermissionFlagSerializer::class)
+public value class Permissions private constructor(public val value: Long) {
+    public val stringValue: String get() = value.toString()
 
     /**
      * An empty permission bit field.
      */
     public companion object {
-        public val NONE: DiscordPermissionFlag = DiscordPermissionFlag(0L)
+        @JvmStatic
+        @get:JvmExposeBoxed
+        public val None: Permissions = Permissions(0L)
+
+        /**
+         * Create a [Permissions] instance.
+         */
+        @JvmStatic
+        @JvmExposeBoxed
+        public fun of(value: Long): Permissions = Permissions(value)
     }
 
     /**
@@ -48,23 +67,26 @@ public value class DiscordPermissionFlag(public val value: Long) {
      * This is a bitwise OR, so adding an already-present permission has no
      * effect.
      */
-    public operator fun plus(other: DiscordPermissionFlag): DiscordPermissionFlag =
-        DiscordPermissionFlag(value or other.value)
+    @JvmExposeBoxed
+    public operator fun plus(other: Permissions): Permissions =
+        Permissions(value or other.value)
 
     /**
      * Removes all bits present in [other] from this bit field.
      *
      * This is a bitwise clear operation; it is not arithmetic subtraction.
      */
-    public operator fun minus(other: DiscordPermissionFlag): DiscordPermissionFlag =
-        DiscordPermissionFlag(value and other.value.inv())
+    @JvmExposeBoxed
+    public operator fun minus(other: Permissions): Permissions =
+        Permissions(value and other.value.inv())
 
     /**
      * Returns `true` when every bit in [other] is present in this bit field.
      *
      * This makes expressions such as `required in granted` possible.
      */
-    public operator fun contains(other: DiscordPermissionFlag): Boolean =
+    @JvmExposeBoxed
+    public operator fun contains(other: Permissions): Boolean =
         contains(other, exactly = false)
 
     /**
@@ -73,7 +95,8 @@ public value class DiscordPermissionFlag(public val value: Long) {
      * When [exactly] is `true`, this bit field must equal [other]. Otherwise,
      * every bit in [other] only needs to be present in this bit field.
      */
-    public fun contains(other: DiscordPermissionFlag, exactly: Boolean): Boolean =
+    @JvmExposeBoxed
+    public fun contains(other: Permissions, exactly: Boolean): Boolean =
         if (exactly) {
             value == other.value
         } else {
@@ -86,7 +109,8 @@ public value class DiscordPermissionFlag(public val value: Long) {
      * Unlike [contains], this does not require all bits in [other] to be
      * present.
      */
-    public fun intersects(other: DiscordPermissionFlag): Boolean =
+    @JvmExposeBoxed
+    public fun intersects(other: Permissions): Boolean =
         value and other.value != 0L
 
     /**
@@ -101,27 +125,27 @@ public value class DiscordPermissionFlag(public val value: Long) {
 /**
  * Combines this bit field with the flag represented by [other].
  */
-public operator fun DiscordPermissionFlag.plus(other: DiscordPermission): DiscordPermissionFlag = this + other.flag
+public operator fun Permissions.plus(other: Permission): Permissions = this + other.flag
 
 
 /**
  * Removes the flag represented by [other] from this bit field.
  */
-public operator fun DiscordPermissionFlag.minus(other: DiscordPermission): DiscordPermissionFlag = this - other.flag
+public operator fun Permissions.minus(other: Permission): Permissions = this - other.flag
 
 
 /**
  * Returns `true` when the flag represented by [other] is present in this
  * bit field.
  */
-public operator fun DiscordPermissionFlag.contains(other: DiscordPermission): Boolean = contains(other.flag)
+public operator fun Permissions.contains(other: Permission): Boolean = contains(other.flag)
 
 
 /**
  * Checks whether the flag represented by [other] is included in this bit
  * field, with the same [exactly] semantics as [contains].
  */
-public fun DiscordPermissionFlag.contains(other: DiscordPermission, exactly: Boolean): Boolean =
+public fun Permissions.contains(other: Permission, exactly: Boolean): Boolean =
     contains(other.flag, exactly)
 
 
@@ -129,4 +153,26 @@ public fun DiscordPermissionFlag.contains(other: DiscordPermission, exactly: Boo
  * Returns `true` when this bit field and the flag represented by [other]
  * share at least one bit.
  */
-public fun DiscordPermissionFlag.intersects(other: DiscordPermission): Boolean = intersects(other.flag)
+public fun Permissions.intersects(other: Permission): Boolean = intersects(other.flag)
+
+
+internal object DiscordPermissionFlagSerializer : KSerializer<Permissions> {
+    override val descriptor: SerialDescriptor =
+        PrimitiveSerialDescriptor(
+            "DiscordPermissionFlag",
+            PrimitiveKind.STRING
+        )
+
+    override fun serialize(
+        encoder: Encoder,
+        value: Permissions
+    ) {
+        encoder.encodeString(value.value.toString())
+    }
+
+    override fun deserialize(
+        decoder: Decoder
+    ): Permissions {
+        return Permissions.of(decoder.decodeString().toLong())
+    }
+}

@@ -22,23 +22,23 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
-class DiscordPermissionTests {
+class PermissionTests {
 
     @Test
     fun permissionValuesAreDistinctSingleBits() {
-        val permissions = DiscordPermission.entries
+        val permissions = Permission.entries
 
         assertEquals(52, permissions.size)
         assertEquals(permissions.size, permissions.map { it.flagValue }.toSet().size)
         assertTrue(permissions.all { it.flagValue > 0L && it.flagValue and (it.flagValue - 1L) == 0L })
         assertFalse(permissions.any { it.flagValue == (1L shl 47) })
-        assertEquals(1L shl 52, DiscordPermission.BYPASS_SLOWMODE.flagValue)
+        assertEquals(1L shl 52, Permission.BYPASS_SLOWMODE.flagValue)
     }
 
     @Test
     fun permissionFlagCanBeCombinedRemovedAndChecked() {
-        val invite = DiscordPermission.CREATE_INSTANT_INVITE
-        val messages = DiscordPermission.SEND_MESSAGES
+        val invite = Permission.CREATE_INSTANT_INVITE
+        val messages = Permission.SEND_MESSAGES
         val required = invite.flag + messages
 
         assertEquals(invite.flagValue or messages.flagValue, required.value)
@@ -47,11 +47,11 @@ class DiscordPermissionTests {
         assertTrue(required.contains(required, exactly = true))
         assertFalse(required.contains(invite, exactly = true))
         assertTrue(required.intersects(messages))
-        assertFalse(required.intersects(DiscordPermissionFlag.NONE))
+        assertFalse(required.intersects(Permissions.None))
 
         assertEquals(messages.flagValue, (required - invite).value)
-        assertEquals(DiscordPermissionFlag.NONE, required - invite - messages)
-        assertTrue(DiscordPermissionFlag.NONE.isEmpty)
+        assertEquals(Permissions.None, required - invite - messages)
+        assertTrue(Permissions.None.isEmpty)
         assertFalse(required.isEmpty)
     }
 }

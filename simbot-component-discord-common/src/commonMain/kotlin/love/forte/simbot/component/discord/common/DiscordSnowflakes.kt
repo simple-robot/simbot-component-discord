@@ -17,7 +17,10 @@
 
 package love.forte.simbot.component.discord.common
 
+import kotlinx.serialization.Serializable
+import kotlin.jvm.JvmExposeBoxed
 import kotlin.jvm.JvmInline
+import kotlin.jvm.JvmSynthetic
 import kotlin.time.Instant
 
 /**
@@ -25,8 +28,17 @@ import kotlin.time.Instant
  * Discord utilizes Twitter’s [snowflake](https://github.com/twitter-archive/snowflake/tree/snowflake-2010)
  * format for uniquely identifiable descriptors (IDs).
  */
+@OptIn(ExperimentalStdlibApi::class)
 @JvmInline
-public value class DiscordSnowflake(public val value: ULong) {
+@Serializable
+@JvmExposeBoxed
+public value class DiscordSnowflake internal constructor(
+    @get:JvmSynthetic
+    public val value: ULong
+) {
+    public val longValue: Long get() = value.toLong()
+    public val stringValue: String get() = value.toString()
+
     /**
      * Milliseconds since Discord Epoch, the first second of 2015 or 1420070400000.
      * Bits from 63 to 22.
@@ -75,6 +87,8 @@ public fun ULong.toDiscordSnowflake(): DiscordSnowflake = DiscordSnowflake(this)
 
 /**
  * Converts the current [String] ULong value into a [DiscordSnowflake].
+ *
+ * @throws NumberFormatException if the string is not a valid representation of a number.
  *
  * @return A [DiscordSnowflake] instance representing the Discord Snowflake ID for this [String] value.
  */

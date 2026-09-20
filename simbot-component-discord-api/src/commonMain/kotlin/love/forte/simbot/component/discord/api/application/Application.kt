@@ -19,6 +19,8 @@ package love.forte.simbot.component.discord.api.application
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import love.forte.simbot.component.discord.common.DiscordId
+import kotlin.jvm.JvmExposeBoxed
 
 /**
  * The [Application Object](https://discord.com/developers/docs/resources/application#application-object)
@@ -52,9 +54,11 @@ import kotlinx.serialization.Serializable
  *
  * @author ForteScarlet
  */
+@OptIn(ExperimentalStdlibApi::class)
 @Serializable
 public class Application internal constructor(
-    public val id: Long,
+    @get:JvmExposeBoxed
+    public val id: DiscordId,
     public val name: String,
     public val icon: String? = null,
     public val description: String,
