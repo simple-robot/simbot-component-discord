@@ -92,5 +92,4 @@ public value class GuildNsfwLevel private constructor(public val value: Int) {
         public fun of(value: Int): GuildNsfwLevel = GuildNsfwLevel(value)
     }
 
-    override fun toString(): String = "GuildNsfwLevel(value=$value)"
 }

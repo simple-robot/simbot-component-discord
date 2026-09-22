@@ -50,8 +50,5 @@ public enum class SystemChannelFlag(
     /** Hides role subscription sticker reply buttons. */
     SUPPRESS_ROLE_SUBSCRIPTION_PURCHASE_NOTIFICATION_REPLIES(
         SystemChannelFlags.of(1L shl 5)
-    );
-
-    /** The raw bit represented by [flag]. */
-    public val flagValue: Long get() = flag.value
+    )
 }

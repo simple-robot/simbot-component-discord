@@ -74,6 +74,4 @@ public value class VideoQualityMode private constructor(public val value: Int) {
         public fun of(value: Int): VideoQualityMode = VideoQualityMode(value)
     }
 
-    override fun toString(): String =
-        "VideoQualityMode(value=$value)"
 }

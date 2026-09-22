@@ -68,5 +68,4 @@ public value class OnboardingMode private constructor(public val value: Int) {
         public fun of(value: Int): OnboardingMode = OnboardingMode(value)
     }
 
-    override fun toString(): String = "OnboardingMode(value=$value)"
 }

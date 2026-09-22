@@ -223,6 +223,4 @@ public value class ChannelType private constructor(public val value: Int) {
         public fun of(value: Int): ChannelType = ChannelType(value)
     }
 
-    override fun toString(): String =
-        "ChannelType(value=$value)"
 }

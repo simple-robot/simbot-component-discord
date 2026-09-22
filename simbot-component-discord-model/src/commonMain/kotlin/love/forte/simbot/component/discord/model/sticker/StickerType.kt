@@ -68,5 +68,4 @@ public value class StickerType private constructor(public val value: Int) {
         public fun of(value: Int): StickerType = StickerType(value)
     }
 
-    override fun toString(): String = "StickerType(value=$value)"
 }

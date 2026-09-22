@@ -67,6 +67,4 @@ public value class PermissionOverwriteType private constructor(public val value:
         public fun of(value: Int): PermissionOverwriteType = PermissionOverwriteType(value)
     }
 
-    override fun toString(): String =
-        "PermissionOverwriteType(value=$value)"
 }

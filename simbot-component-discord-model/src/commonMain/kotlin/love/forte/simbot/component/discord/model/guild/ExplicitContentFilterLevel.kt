@@ -84,6 +84,4 @@ public value class ExplicitContentFilterLevel private constructor(public val val
             ExplicitContentFilterLevel(value)
     }
 
-    override fun toString(): String =
-        "ExplicitContentFilterLevel(value=$value)"
 }

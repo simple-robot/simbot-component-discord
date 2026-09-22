@@ -97,5 +97,4 @@ public value class GuildScheduledEventStatus private constructor(public val valu
             GuildScheduledEventStatus(value)
     }
 
-    override fun toString(): String = "GuildScheduledEventStatus(value=$value)"
 }

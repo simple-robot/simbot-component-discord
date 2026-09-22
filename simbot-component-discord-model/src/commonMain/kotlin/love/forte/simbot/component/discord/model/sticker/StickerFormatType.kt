@@ -92,5 +92,4 @@ public value class StickerFormatType private constructor(public val value: Int) 
         public fun of(value: Int): StickerFormatType = StickerFormatType(value)
     }
 
-    override fun toString(): String = "StickerFormatType(value=$value)"
 }

@@ -30,7 +30,6 @@ import kotlinx.serialization.encoding.Encoder
  * [Recurrence Rule Weekday](https://docs.discord.com/developers/resources/guild-scheduled-event#guild-scheduled-event-recurrence-rule-object-guild-scheduled-event-recurrence-rule-weekday).
  *
  * Represents a weekday in a scheduled event recurrence rule.
- * Unknown values are preserved for forward compatibility.
  *
  * @property value The raw Discord weekday value, where Monday is zero.
  */

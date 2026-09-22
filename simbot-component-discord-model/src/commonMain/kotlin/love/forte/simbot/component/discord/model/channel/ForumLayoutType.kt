@@ -87,6 +87,4 @@ public value class ForumLayoutType private constructor(public val value: Int) {
         public fun of(value: Int): ForumLayoutType = ForumLayoutType(value)
     }
 
-    override fun toString(): String =
-        "ForumLayoutType(value=$value)"
 }

@@ -68,5 +68,4 @@ public value class MfaLevel private constructor(public val value: Int) {
         public fun of(value: Int): MfaLevel = MfaLevel(value)
     }
 
-    override fun toString(): String = "MfaLevel(value=$value)"
 }

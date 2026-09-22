@@ -99,6 +99,4 @@ public value class AutoArchiveDuration private constructor(public val value: Int
         public fun of(value: Int): AutoArchiveDuration = AutoArchiveDuration(value)
     }
 
-    override fun toString(): String =
-        "AutoArchiveDuration(value=$value)"
 }

@@ -113,8 +113,6 @@ public value class ChannelFlags private constructor(public val value: Long) {
     public val isEmpty: Boolean
         get() = value == 0L
 
-    override fun toString(): String =
-        "ChannelFlags(value=$value)"
 }
 
 /**

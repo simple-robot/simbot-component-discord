@@ -67,6 +67,4 @@ public value class TeamMembershipState private constructor(public val value: Int
         public fun of(value: Int): TeamMembershipState = TeamMembershipState(value)
     }
 
-    override fun toString(): String =
-        "TeamMembershipState(value=$value)"
 }

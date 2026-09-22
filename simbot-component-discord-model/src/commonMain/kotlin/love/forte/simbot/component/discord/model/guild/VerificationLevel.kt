@@ -104,5 +104,4 @@ public value class VerificationLevel private constructor(public val value: Int) 
         public fun of(value: Int): VerificationLevel = VerificationLevel(value)
     }
 
-    override fun toString(): String = "VerificationLevel(value=$value)"
 }

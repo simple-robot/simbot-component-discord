@@ -75,6 +75,4 @@ public value class SortOrderType private constructor(public val value: Int) {
         public fun of(value: Int): SortOrderType = SortOrderType(value)
     }
 
-    override fun toString(): String =
-        "SortOrderType(value=$value)"
 }

@@ -71,6 +71,4 @@ public value class DefaultMessageNotificationLevel private constructor(public va
             DefaultMessageNotificationLevel(value)
     }
 
-    override fun toString(): String =
-        "DefaultMessageNotificationLevel(value=$value)"
 }

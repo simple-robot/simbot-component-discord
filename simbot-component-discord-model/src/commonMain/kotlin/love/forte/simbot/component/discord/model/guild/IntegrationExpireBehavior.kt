@@ -70,5 +70,4 @@ public value class IntegrationExpireBehavior private constructor(public val valu
             IntegrationExpireBehavior(value)
     }
 
-    override fun toString(): String = "IntegrationExpireBehavior(value=$value)"
 }

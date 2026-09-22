@@ -69,5 +69,4 @@ public value class OnboardingPromptType private constructor(public val value: In
         public fun of(value: Int): OnboardingPromptType = OnboardingPromptType(value)
     }
 
-    override fun toString(): String = "OnboardingPromptType(value=$value)"
 }

@@ -450,5 +450,4 @@ public value class GuildFeature private constructor(public val value: String) {
         public fun of(value: String): GuildFeature = GuildFeature(value)
     }
 
-    override fun toString(): String = "GuildFeature(value=$value)"
 }

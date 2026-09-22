@@ -72,6 +72,4 @@ public value class ApplicationIntegrationType private constructor(public val val
         public fun of(value: Int): ApplicationIntegrationType = ApplicationIntegrationType(value)
     }
 
-    override fun toString(): String =
-        "ApplicationIntegrationType(value=$value)"
 }

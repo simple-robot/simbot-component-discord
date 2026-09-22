@@ -96,5 +96,4 @@ public value class RecurrenceRuleFrequency private constructor(public val value:
         public fun of(value: Int): RecurrenceRuleFrequency = RecurrenceRuleFrequency(value)
     }
 
-    override fun toString(): String = "RecurrenceRuleFrequency(value=$value)"
 }

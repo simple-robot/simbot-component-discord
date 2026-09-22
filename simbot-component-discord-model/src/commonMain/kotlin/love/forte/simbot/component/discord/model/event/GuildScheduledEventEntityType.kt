@@ -84,6 +84,4 @@ public value class GuildScheduledEventEntityType private constructor(public val 
             GuildScheduledEventEntityType(value)
     }
 
-    override fun toString(): String =
-        "GuildScheduledEventEntityType(value=$value)"
 }

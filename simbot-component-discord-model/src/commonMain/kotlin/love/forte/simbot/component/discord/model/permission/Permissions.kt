@@ -124,8 +124,6 @@ public value class Permissions private constructor(public val value: Long) {
     public val isEmpty: Boolean
         get() = value == 0L
 
-    override fun toString(): String =
-        "Permissions(value=$value)"
 }
 
 

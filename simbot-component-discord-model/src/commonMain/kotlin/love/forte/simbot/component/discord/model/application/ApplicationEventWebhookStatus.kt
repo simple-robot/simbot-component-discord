@@ -85,6 +85,4 @@ public value class ApplicationEventWebhookStatus private constructor(public val 
         public fun of(value: Int): ApplicationEventWebhookStatus = ApplicationEventWebhookStatus(value)
     }
 
-    override fun toString(): String =
-        "ApplicationEventWebhookStatus(value=$value)"
 }

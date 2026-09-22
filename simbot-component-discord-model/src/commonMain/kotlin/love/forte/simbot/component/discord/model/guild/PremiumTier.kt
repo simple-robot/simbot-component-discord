@@ -92,5 +92,4 @@ public value class PremiumTier private constructor(public val value: Int) {
         public fun of(value: Int): PremiumTier = PremiumTier(value)
     }
 
-    override fun toString(): String = "PremiumTier(value=$value)"
 }

@@ -60,7 +60,6 @@ public value class RoleFlags private constructor(public val value: Long) {
 
     public val isEmpty: Boolean get() = value == 0L
 
-    override fun toString(): String = "RoleFlags(value=$value)"
 }
 
 /** Combines this bit field with [other]. */

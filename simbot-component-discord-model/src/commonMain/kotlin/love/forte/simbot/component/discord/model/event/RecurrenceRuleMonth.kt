@@ -30,7 +30,6 @@ import kotlinx.serialization.encoding.Encoder
  * [Recurrence Rule Month](https://docs.discord.com/developers/resources/guild-scheduled-event#guild-scheduled-event-recurrence-rule-object-guild-scheduled-event-recurrence-rule-month).
  *
  * Represents a month in a scheduled event recurrence rule.
- * Unknown values are preserved for forward compatibility.
  *
  * @property value The raw Discord month value from 1 through 12.
  */

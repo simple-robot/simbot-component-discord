@@ -68,5 +68,4 @@ public value class StagePrivacyLevel private constructor(public val value: Int) 
         public fun of(value: Int): StagePrivacyLevel = StagePrivacyLevel(value)
     }
 
-    override fun toString(): String = "StagePrivacyLevel(value=$value)"
 }

@@ -91,6 +91,4 @@ public value class UserPremiumType private constructor(public val value: Int) {
         public fun of(value: Int): UserPremiumType = UserPremiumType(value)
     }
 
-    override fun toString(): String =
-        "UserPremiumType(value=$value)"
 }

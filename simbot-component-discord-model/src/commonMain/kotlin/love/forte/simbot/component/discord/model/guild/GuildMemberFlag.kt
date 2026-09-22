@@ -57,8 +57,5 @@ public enum class GuildMemberFlag(
     DM_SETTINGS_UPSELL_ACKNOWLEDGED(GuildMemberFlags.of(1L shl 9)),
 
     /** AutoMod has quarantined the member's guild tag. */
-    AUTOMOD_QUARANTINED_GUILD_TAG(GuildMemberFlags.of(1L shl 10));
-
-    /** The raw bit represented by [flag]. */
-    public val flagValue: Long get() = flag.value
+    AUTOMOD_QUARANTINED_GUILD_TAG(GuildMemberFlags.of(1L shl 10))
 }

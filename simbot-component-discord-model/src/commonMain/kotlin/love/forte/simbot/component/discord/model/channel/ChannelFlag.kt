@@ -15,7 +15,7 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-package love.forte.simbot.component.discord.model.channel;
+package love.forte.simbot.component.discord.model.channel
 
 import kotlin.jvm.JvmExposeBoxed
 
@@ -62,11 +62,5 @@ public enum class ChannelFlag(
      * This channel is a Spoiler Channel and users must opt in to view
      * its contents.
      */
-    IS_SPOILER_CHANNEL(ChannelFlags.of(1L shl 21));
-
-    /**
-     * The [Long] value of [flag].
-     */
-    public val flagValue: Long
-        get() = flag.value
+    IS_SPOILER_CHANNEL(ChannelFlags.of(1L shl 21))
 }

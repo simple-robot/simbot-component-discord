@@ -57,6 +57,4 @@ public value class GuildScheduledEventPrivacyLevel private constructor(public va
             GuildScheduledEventPrivacyLevel(value)
     }
 
-    override fun toString(): String =
-        "GuildScheduledEventPrivacyLevel(value=$value)"
 }
