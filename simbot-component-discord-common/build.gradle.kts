@@ -71,6 +71,7 @@ kotlin {
 
         commonTest.dependencies {
             implementation(kotlin("test"))
+            implementation(libs.kotlinx.serialization.json)
             // implementation(libs.kotlinx.coroutines.test)
             // https://ktor.io/docs/http-client-testing.html
             // implementation(libs.ktor.client.mock)

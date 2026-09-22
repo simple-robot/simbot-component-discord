@@ -17,4 +17,7 @@
 
 package love.forte.simbot.component.discord.common
 
+/**
+ * @see DiscordSnowflake
+ */
 public typealias DiscordId = DiscordSnowflake
