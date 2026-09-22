@@ -58,7 +58,7 @@ public value class DiscordSnowflake internal constructor(
      * Milliseconds since Discord Epoch, the first second of 2015 or 1420070400000.
      * Bits from 63 to 22.
      */
-    public val timestamp: Long
+    public val milliseconds: Long
         get() = (value shr 22).toLong() + DISCORD_EPOCH
 
     /**
@@ -96,7 +96,7 @@ public value class DiscordSnowflake internal constructor(
  * @return An [Instant] instance representing the timestamp of this [DiscordSnowflake].
  */
 public val DiscordSnowflake.instant: Instant
-    get() = Instant.fromEpochMilliseconds(timestamp)
+    get() = Instant.fromEpochMilliseconds(milliseconds)
 
 /**
  * Converts the current [ULong] value into a [DiscordSnowflake].

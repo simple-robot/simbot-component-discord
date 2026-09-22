@@ -14,7 +14,7 @@ class DiscordSnowflakeTests {
     @Test
     fun testDiscordSnowflake() {
         val snowflake = 175928847299117063u.toDiscordSnowflake()
-        assertEquals(1462015105796L, snowflake.timestamp)
+        assertEquals(1462015105796L, snowflake.milliseconds)
         assertEquals(Instant.parse("2016-04-30T11:18:25.796Z"), snowflake.instant)
         assertEquals(1, snowflake.internalWorkerId)
         assertEquals(0, snowflake.internalProcessId)
