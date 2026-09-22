@@ -17,7 +17,13 @@
 
 package love.forte.simbot.component.discord.common
 
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotlin.jvm.JvmExposeBoxed
 import kotlin.jvm.JvmInline
 import kotlin.jvm.JvmSynthetic
@@ -27,16 +33,25 @@ import kotlin.time.Instant
  * [Discord Snowflake ID](https://docs.discord.com/developers/reference#snowflakes),
  * Discord utilizes Twitter’s [snowflake](https://github.com/twitter-archive/snowflake/tree/snowflake-2010)
  * format for uniquely identifiable descriptors (IDs).
+ *
+ * @property value The unsigned 64-bit raw snowflake value.
  */
 @OptIn(ExperimentalStdlibApi::class)
 @JvmInline
-@Serializable
+@Serializable(with = DiscordSnowflakeSerializer::class)
 @JvmExposeBoxed
 public value class DiscordSnowflake internal constructor(
     @get:JvmSynthetic
     public val value: ULong
 ) {
+    /**
+     * The raw snowflake value interpreted as a signed [Long].
+     */
     public val longValue: Long get() = value.toLong()
+
+    /**
+     * The raw snowflake value serialized as a decimal string.
+     */
     public val stringValue: String get() = value.toString()
 
     /**
@@ -66,8 +81,13 @@ public value class DiscordSnowflake internal constructor(
         get() = (value and 0xFFFu).toInt()
 
     public companion object {
+        /**
+         * Discord's epoch in Unix milliseconds.
+         */
         private const val DISCORD_EPOCH: Long = 1420070400000L
     }
+
+    override fun toString(): String = stringValue
 }
 
 /**
@@ -93,3 +113,15 @@ public fun ULong.toDiscordSnowflake(): DiscordSnowflake = DiscordSnowflake(this)
  * @return A [DiscordSnowflake] instance representing the Discord Snowflake ID for this [String] value.
  */
 public fun String.toDiscordSnowflake(): DiscordSnowflake = toULong().toDiscordSnowflake()
+
+internal object DiscordSnowflakeSerializer : KSerializer<DiscordSnowflake> {
+    override val descriptor: SerialDescriptor =
+        PrimitiveSerialDescriptor("DiscordSnowflake", PrimitiveKind.STRING)
+
+    override fun serialize(encoder: Encoder, value: DiscordSnowflake) {
+        encoder.encodeString(value.stringValue)
+    }
+
+    override fun deserialize(decoder: Decoder): DiscordSnowflake =
+        decoder.decodeString().toDiscordSnowflake()
+}

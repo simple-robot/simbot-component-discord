@@ -31,6 +31,8 @@ import kotlin.jvm.JvmStatic
  * Unknown bits are preserved, allowing compatibility with channel flags
  * introduced by newer Discord API versions.
  *
+ * @property value The raw channel flags bit field.
+ *
  * @see ChannelFlag
  * @see [Channel flags](https://docs.discord.com/developers/resources/channel#channel-object-channel-flags)
  *
@@ -110,6 +112,9 @@ public value class ChannelFlags private constructor(public val value: Long) {
      */
     public val isEmpty: Boolean
         get() = value == 0L
+
+    override fun toString(): String =
+        "ChannelFlags(value=$value)"
 }
 
 /**

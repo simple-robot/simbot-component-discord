@@ -15,7 +15,7 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-package love.forte.simbot.component.discord.api.channel
+package love.forte.simbot.component.discord.api.team
 
 import kotlinx.serialization.Serializable
 import kotlin.jvm.JvmExposeBoxed
@@ -23,57 +23,50 @@ import kotlin.jvm.JvmInline
 import kotlin.jvm.JvmStatic
 
 /**
- * [Video Quality Modes](https://docs.discord.com/developers/resources/channel#channel-object-video-quality-modes).
+ * [Team Membership State Enum](https://docs.discord.com/developers/topics/teams#data-models-team-membership-state-enum).
  *
- * Represents the camera video quality mode of a voice channel.
+ * Represents the membership state of a developer team member.
  *
- * Known values:
- *
- * - 1 = AUTO
- * - 2 = FULL
- *
- * @property value The raw Discord video quality mode value.
- *
- * @see Channel
+ * @property value The raw Discord membership state value.
  */
 @OptIn(ExperimentalStdlibApi::class)
 @JvmInline
 @JvmExposeBoxed
 @Serializable
-public value class VideoQualityMode private constructor(public val value: Int) {
+public value class TeamMembershipState private constructor(public val value: Int) {
     public companion object {
         /**
-         * AUTO value constant.
+         * Raw value for an invited team member.
          */
-        public const val AUTO_VALUE: Int = 1
+        public const val INVITED_VALUE: Int = 1
 
         /**
-         * FULL value constant.
+         * Raw value for an accepted team member.
          */
-        public const val FULL_VALUE: Int = 2
+        public const val ACCEPTED_VALUE: Int = 2
 
         /**
-         * Discord chooses the quality for optimal performance.
-         */
-        @JvmStatic
-        @get:JvmExposeBoxed
-        public val Auto: VideoQualityMode = VideoQualityMode(AUTO_VALUE)
-
-        /**
-         * Full video quality, currently 720p.
+         * The member has been invited but has not accepted.
          */
         @JvmStatic
         @get:JvmExposeBoxed
-        public val Full: VideoQualityMode = VideoQualityMode(FULL_VALUE)
+        public val Invited: TeamMembershipState = TeamMembershipState(INVITED_VALUE)
 
         /**
-         * Creates a [VideoQualityMode] from any integer value.
+         * The member has accepted the invitation.
+         */
+        @JvmStatic
+        @get:JvmExposeBoxed
+        public val Accepted: TeamMembershipState = TeamMembershipState(ACCEPTED_VALUE)
+
+        /**
+         * Creates a [TeamMembershipState] from a raw Discord value.
          */
         @JvmStatic
         @JvmExposeBoxed
-        public fun of(value: Int): VideoQualityMode = VideoQualityMode(value)
+        public fun of(value: Int): TeamMembershipState = TeamMembershipState(value)
     }
 
     override fun toString(): String =
-        "VideoQualityMode(value=$value)"
+        "TeamMembershipState(value=$value)"
 }

@@ -23,57 +23,50 @@ import kotlin.jvm.JvmInline
 import kotlin.jvm.JvmStatic
 
 /**
- * [Video Quality Modes](https://docs.discord.com/developers/resources/channel#channel-object-video-quality-modes).
+ * [Overwrite Object](https://docs.discord.com/developers/resources/channel#overwrite-object).
  *
- * Represents the camera video quality mode of a voice channel.
+ * Represents the target type of a channel permission overwrite.
  *
- * Known values:
- *
- * - 1 = AUTO
- * - 2 = FULL
- *
- * @property value The raw Discord video quality mode value.
- *
- * @see Channel
+ * @property value The raw Discord overwrite target type value.
  */
 @OptIn(ExperimentalStdlibApi::class)
 @JvmInline
 @JvmExposeBoxed
 @Serializable
-public value class VideoQualityMode private constructor(public val value: Int) {
+public value class PermissionOverwriteType private constructor(public val value: Int) {
     public companion object {
         /**
-         * AUTO value constant.
+         * Raw value for a role overwrite.
          */
-        public const val AUTO_VALUE: Int = 1
+        public const val ROLE_VALUE: Int = 0
 
         /**
-         * FULL value constant.
+         * Raw value for a member overwrite.
          */
-        public const val FULL_VALUE: Int = 2
+        public const val MEMBER_VALUE: Int = 1
 
         /**
-         * Discord chooses the quality for optimal performance.
-         */
-        @JvmStatic
-        @get:JvmExposeBoxed
-        public val Auto: VideoQualityMode = VideoQualityMode(AUTO_VALUE)
-
-        /**
-         * Full video quality, currently 720p.
+         * The overwrite targets a guild role.
          */
         @JvmStatic
         @get:JvmExposeBoxed
-        public val Full: VideoQualityMode = VideoQualityMode(FULL_VALUE)
+        public val Role: PermissionOverwriteType = PermissionOverwriteType(ROLE_VALUE)
 
         /**
-         * Creates a [VideoQualityMode] from any integer value.
+         * The overwrite targets an individual guild member.
+         */
+        @JvmStatic
+        @get:JvmExposeBoxed
+        public val Member: PermissionOverwriteType = PermissionOverwriteType(MEMBER_VALUE)
+
+        /**
+         * Creates a [PermissionOverwriteType] from a raw Discord value.
          */
         @JvmStatic
         @JvmExposeBoxed
-        public fun of(value: Int): VideoQualityMode = VideoQualityMode(value)
+        public fun of(value: Int): PermissionOverwriteType = PermissionOverwriteType(value)
     }
 
     override fun toString(): String =
-        "VideoQualityMode(value=$value)"
+        "PermissionOverwriteType(value=$value)"
 }

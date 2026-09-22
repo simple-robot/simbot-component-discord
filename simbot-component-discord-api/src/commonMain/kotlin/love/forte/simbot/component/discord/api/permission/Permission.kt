@@ -22,17 +22,20 @@ import kotlin.jvm.JvmExposeBoxed
 
 /**
  * [Discord permission](https://docs.discord.com/developers/topics/permissions).
+ *
+ * Represents a known permission bit and the channel types for which Discord
+ * documents that permission.
+ *
+ * @property flag The bit represented by this permission.
+ * @property channelTypes Channel types associated with this permission by
+ * Discord. An empty set means Discord does not list a channel type.
+ *
  * @author Forte Scarlet
  */
 @OptIn(ExperimentalStdlibApi::class)
 public enum class Permission(
     @get:JvmExposeBoxed
     public val flag: Permissions,
-    /**
-     * Channel types for which Discord lists this permission. An empty set
-     * means that the official table does not associate the permission with a
-     * channel type.
-     */
     public val channelTypes: Set<DiscordPermissionChannelType>
 ) {
     /**

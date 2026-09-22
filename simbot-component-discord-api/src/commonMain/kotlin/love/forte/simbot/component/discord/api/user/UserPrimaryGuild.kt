@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024. ForteScarlet.
+ * Copyright (c) 2026. ForteScarlet.
  *
  * This file is part of simbot-component-discord.
  *
@@ -15,7 +15,7 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-package love.forte.simbot.component.discord.api.team
+package love.forte.simbot.component.discord.api.user
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -23,29 +23,26 @@ import love.forte.simbot.component.discord.common.DiscordId
 import kotlin.jvm.JvmExposeBoxed
 
 /**
- * [Team Object](https://docs.discord.com/developers/topics/teams#data-models-team-object).
+ * [User Primary Guild](https://docs.discord.com/developers/resources/user#user-object-user-primary-guild).
  *
- * Represents a Developer Portal team that can own Discord applications.
+ * Contains the identity settings for a user's selected primary guild.
  *
- * @property icon The team's icon hash, when set.
- * @property id The team's Discord ID.
- * @property members The members of the team.
- * @property name The team's name.
- * @property ownerUserId The Discord ID of the team's owner.
+ * @property identityGuildId The guild used for the user's primary identity.
+ * @property identityEnabled Whether the primary identity is enabled.
+ * @property tag The primary guild tag, when configured.
+ * @property badge The primary guild badge, when configured.
  */
 @OptIn(ExperimentalStdlibApi::class)
 @Serializable
-public class Team internal constructor(
-    public val icon: String? = null,
+public class UserPrimaryGuild internal constructor(
+    @SerialName("identity_guild_id")
     @get:JvmExposeBoxed
-    public val id: DiscordId,
-    public val members: List<TeamMember>,
-    public val name: String,
-    @SerialName("owner_user_id")
-    @get:JvmExposeBoxed
-    public val ownerUserId: DiscordId,
+    public val identityGuildId: DiscordId? = null,
+    @SerialName("identity_enabled")
+    public val identityEnabled: Boolean? = null,
+    public val tag: String? = null,
+    public val badge: String? = null,
 ) {
     override fun toString(): String =
-        "Team(id=$id, name=$name, ownerUserId=$ownerUserId)"
+        "UserPrimaryGuild(identityGuildId=$identityGuildId, tag=$tag)"
 }
-

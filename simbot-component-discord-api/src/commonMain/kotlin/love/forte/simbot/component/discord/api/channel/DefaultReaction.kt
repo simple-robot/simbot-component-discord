@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024. ForteScarlet.
+ * Copyright (c) 2026. ForteScarlet.
  *
  * This file is part of simbot-component-discord.
  *
@@ -15,7 +15,7 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-package love.forte.simbot.component.discord.api.team
+package love.forte.simbot.component.discord.api.channel
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -23,29 +23,23 @@ import love.forte.simbot.component.discord.common.DiscordId
 import kotlin.jvm.JvmExposeBoxed
 
 /**
- * [Team Object](https://docs.discord.com/developers/topics/teams#data-models-team-object).
+ * [Default Reaction Object](https://docs.discord.com/developers/resources/channel#default-reaction-object).
  *
- * Represents a Developer Portal team that can own Discord applications.
+ * Specifies the emoji displayed by the add-reaction button on a forum or media
+ * thread; Discord provides either an emoji ID or an emoji name.
  *
- * @property icon The team's icon hash, when set.
- * @property id The team's Discord ID.
- * @property members The members of the team.
- * @property name The team's name.
- * @property ownerUserId The Discord ID of the team's owner.
+ * @property emojiId The custom emoji ID, when the reaction uses a custom emoji.
+ * @property emojiName The Unicode emoji name, when the reaction uses Unicode.
  */
 @OptIn(ExperimentalStdlibApi::class)
 @Serializable
-public class Team internal constructor(
-    public val icon: String? = null,
+public class DefaultReaction internal constructor(
+    @SerialName("emoji_id")
     @get:JvmExposeBoxed
-    public val id: DiscordId,
-    public val members: List<TeamMember>,
-    public val name: String,
-    @SerialName("owner_user_id")
-    @get:JvmExposeBoxed
-    public val ownerUserId: DiscordId,
+    public val emojiId: DiscordId? = null,
+    @SerialName("emoji_name")
+    public val emojiName: String? = null,
 ) {
     override fun toString(): String =
-        "Team(id=$id, name=$name, ownerUserId=$ownerUserId)"
+        "DefaultReaction(emojiId=$emojiId, emojiName=$emojiName)"
 }
-

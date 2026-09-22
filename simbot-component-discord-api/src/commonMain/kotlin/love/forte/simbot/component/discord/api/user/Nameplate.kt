@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024. ForteScarlet.
+ * Copyright (c) 2026. ForteScarlet.
  *
  * This file is part of simbot-component-discord.
  *
@@ -15,7 +15,7 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-package love.forte.simbot.component.discord.api.team
+package love.forte.simbot.component.discord.api.user
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -23,29 +23,25 @@ import love.forte.simbot.component.discord.common.DiscordId
 import kotlin.jvm.JvmExposeBoxed
 
 /**
- * [Team Object](https://docs.discord.com/developers/topics/teams#data-models-team-object).
+ * [Nameplate](https://docs.discord.com/developers/resources/user#nameplate-nameplate-structure).
  *
- * Represents a Developer Portal team that can own Discord applications.
+ * Describes a collectible nameplate equipped by a user.
  *
- * @property icon The team's icon hash, when set.
- * @property id The team's Discord ID.
- * @property members The members of the team.
- * @property name The team's name.
- * @property ownerUserId The Discord ID of the team's owner.
+ * @property skuId The SKU ID of the nameplate.
+ * @property asset The nameplate asset hash.
+ * @property label The nameplate label.
+ * @property palette The nameplate color palette.
  */
 @OptIn(ExperimentalStdlibApi::class)
 @Serializable
-public class Team internal constructor(
-    public val icon: String? = null,
+public class Nameplate internal constructor(
+    @SerialName("sku_id")
     @get:JvmExposeBoxed
-    public val id: DiscordId,
-    public val members: List<TeamMember>,
-    public val name: String,
-    @SerialName("owner_user_id")
-    @get:JvmExposeBoxed
-    public val ownerUserId: DiscordId,
+    public val skuId: DiscordId,
+    public val asset: String,
+    public val label: String,
+    public val palette: String,
 ) {
     override fun toString(): String =
-        "Team(id=$id, name=$name, ownerUserId=$ownerUserId)"
+        "Nameplate(skuId=$skuId, label=$label, palette=$palette)"
 }
-

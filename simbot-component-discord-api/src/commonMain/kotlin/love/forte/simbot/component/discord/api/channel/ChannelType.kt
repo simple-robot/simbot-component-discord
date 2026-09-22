@@ -43,6 +43,8 @@ import kotlin.jvm.JvmStatic
  * - 15 = GUILD_FORUM
  * - 16 = GUILD_MEDIA
  *
+ * @property value The raw Discord channel type value.
+ *
  * @see Channel
  */
 @OptIn(ExperimentalStdlibApi::class)
@@ -220,4 +222,7 @@ public value class ChannelType private constructor(public val value: Int) {
         @JvmExposeBoxed
         public fun of(value: Int): ChannelType = ChannelType(value)
     }
+
+    override fun toString(): String =
+        "ChannelType(value=$value)"
 }

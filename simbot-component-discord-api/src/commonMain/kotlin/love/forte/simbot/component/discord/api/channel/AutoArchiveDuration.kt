@@ -34,6 +34,8 @@ import kotlin.jvm.JvmStatic
  *
  * This type is used by both the channel's `default_auto_archive_duration`
  * and thread metadata's `auto_archive_duration`.
+ *
+ * @property value The archive duration in minutes.
  */
 @OptIn(ExperimentalStdlibApi::class)
 @JvmInline
@@ -96,4 +98,7 @@ public value class AutoArchiveDuration private constructor(public val value: Int
         @JvmExposeBoxed
         public fun of(value: Int): AutoArchiveDuration = AutoArchiveDuration(value)
     }
+
+    override fun toString(): String =
+        "AutoArchiveDuration(value=$value)"
 }

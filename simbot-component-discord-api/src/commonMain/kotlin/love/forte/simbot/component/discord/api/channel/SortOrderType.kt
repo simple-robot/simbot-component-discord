@@ -33,6 +33,8 @@ import kotlin.jvm.JvmStatic
  * - 0 = LATEST_ACTIVITY
  * - 1 = CREATION_DATE
  *
+ * @property value The raw Discord sort order type value.
+ *
  * @see Channel
  */
 @OptIn(ExperimentalStdlibApi::class)
@@ -72,4 +74,7 @@ public value class SortOrderType private constructor(public val value: Int) {
         @JvmExposeBoxed
         public fun of(value: Int): SortOrderType = SortOrderType(value)
     }
+
+    override fun toString(): String =
+        "SortOrderType(value=$value)"
 }

@@ -19,11 +19,16 @@ package love.forte.simbot.component.discord.api.application
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonObject
+import love.forte.simbot.component.discord.api.team.Team
+import love.forte.simbot.component.discord.api.user.User
 import love.forte.simbot.component.discord.common.DiscordId
 import kotlin.jvm.JvmExposeBoxed
 
 /**
  * The [Application Object](https://discord.com/developers/docs/resources/application#application-object)
+ *
+ * Represents a Discord developer application and its installation settings.
  *
  * @property id ID of the app
  * @property name Name of the app
@@ -44,12 +49,19 @@ import kotlin.jvm.JvmExposeBoxed
  * @property slug If this app is a game sold on Discord, this field will be the URL slug that links to the store page
  * @property coverImage App's default rich presence invite cover image hash
  * @property flags App's public flags
+ * @property flagsNew App's complete public flags as a string-serialized bit field
  * @property approximateGuildCount Approximate count of guilds the app has been added to
+ * @property approximateUserInstallCount Approximate count of users that have installed the app
+ * @property approximateUserAuthorizationCount Approximate count of users that have authorized the app with OAuth2
  * @property redirectUris Array of redirect URIs for the app
  * @property interactionsEndpointUrl Interactions endpoint URL for the app
  * @property roleConnectionsVerificationUrl Role connection verification URL for the app
+ * @property eventWebhooksUrl Event webhook URL for the app
+ * @property eventWebhooksStatus Whether event webhooks are enabled or disabled
+ * @property eventWebhooksTypes Webhook event types the app subscribes to
  * @property tags List of tags describing the content and functionality of the app. Max of 5 tags.
  * @property installParams Settings for the app's default in-app authorization link, if enabled
+ * @property integrationTypesConfig Default install configuration for each supported installation context
  * @property customInstallUrl Default custom authorization URL for the app, if enabled
  *
  * @author ForteScarlet
@@ -68,49 +80,57 @@ public class Application internal constructor(
     public val botPublic: Boolean,
     @SerialName("bot_require_code_grant")
     public val botRequireCodeGrant: Boolean,
-    // val bot: partial user object? = null, // TODO bot: partial user object
+    public val bot: User? = null,
     @SerialName("terms_of_service_url")
     public val termsOfServiceUrl: String? = null,
     @SerialName("privacy_policy_url")
     public val privacyPolicyUrl: String? = null,
-    // val owner: partial user object? = null, // TODO owner: partial user object
+    public val owner: User? = null,
     @SerialName("verify_key")
     public val verifyKey: String,
-    // val team: team object? = null, // TODO team: team object
+    public val team: Team? = null,
     @SerialName("guild_id")
-    public val guildId: Long? = null,
-    // val guild: partial guild object? = null, // TODO guild: partial guild object
+    @get:JvmExposeBoxed
+    public val guildId: DiscordId? = null,
+    // TODO：应用对象中的 guild 只有部分 Guild 字段，而完整 Guild 模型尚未建立；暂时保留原始对象。
+    public val guild: JsonObject? = null,
     @SerialName("primary_sku_id")
-    public val primarySkuId: Long? = null,
+    @get:JvmExposeBoxed
+    public val primarySkuId: DiscordId? = null,
     public val slug: String? = null,
     @SerialName("cover_image")
     public val coverImage: String? = null,
     public val flags: Int? = null,
+    @SerialName("flags_new")
+    public val flagsNew: String? = null,
     @SerialName("approximate_guild_count")
     public val approximateGuildCount: Int? = null,
+    @SerialName("approximate_user_install_count")
+    public val approximateUserInstallCount: Int? = null,
+    @SerialName("approximate_user_authorization_count")
+    public val approximateUserAuthorizationCount: Int? = null,
     @SerialName("redirect_uris")
     public val redirectUris: List<String>? = null,
     @SerialName("interactions_endpoint_url")
     public val interactionsEndpointUrl: String? = null,
     @SerialName("role_connections_verification_url")
     public val roleConnectionsVerificationUrl: String? = null,
+    @SerialName("event_webhooks_url")
+    public val eventWebhooksUrl: String? = null,
+    @SerialName("event_webhooks_status")
+    @get:JvmExposeBoxed
+    public val eventWebhooksStatus: ApplicationEventWebhookStatus? = null,
+    @SerialName("event_webhooks_types")
+    public val eventWebhooksTypes: List<String>? = null,
     public val tags: List<String>? = null,
     @SerialName("install_params")
     public val installParams: InstallParams? = null,
+    @SerialName("integration_types_config")
+    public val integrationTypesConfig: Map<String, ApplicationIntegrationTypeConfiguration>? = null,
     @SerialName("custom_install_url")
     public val customInstallUrl: String? = null,
-)
+) {
+    override fun toString(): String =
+        "Application(id=$id, name=$name)"
+}
 
-/**
- * [Install Params Structure](https://discord.com/developers/docs/resources/application#install-params-object-install-params-structure)
- *
- * @property scopes Scopes to add the application to the server with
- * @property permissions Permissions to request for the bot role
- *
- * @author ForteScarlet
- */
-@Serializable
-public class InstallParams internal constructor(
-    public val scopes: List<String> = emptyList(),
-    public val permissions: String
-)

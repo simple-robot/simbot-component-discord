@@ -33,6 +33,8 @@ import kotlin.jvm.JvmStatic
  * - 1 = LIST_VIEW
  * - 2 = GALLERY_VIEW
  *
+ * @property value The raw Discord forum layout type value.
+ *
  * @see Channel
  */
 @OptIn(ExperimentalStdlibApi::class)
@@ -84,4 +86,7 @@ public value class ForumLayoutType private constructor(public val value: Int) {
         @JvmExposeBoxed
         public fun of(value: Int): ForumLayoutType = ForumLayoutType(value)
     }
+
+    override fun toString(): String =
+        "ForumLayoutType(value=$value)"
 }

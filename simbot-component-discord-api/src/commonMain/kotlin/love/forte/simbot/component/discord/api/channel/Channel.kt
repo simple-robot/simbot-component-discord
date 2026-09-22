@@ -19,6 +19,7 @@ package love.forte.simbot.component.discord.api.channel
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import love.forte.simbot.component.discord.api.user.User
 import love.forte.simbot.component.discord.common.DiscordId
 import kotlin.jvm.JvmExposeBoxed
 import kotlin.time.Instant
@@ -105,13 +106,13 @@ public class Channel internal constructor(
     public val type: ChannelType,
 
     @SerialName("guild_id")
-    public val guildId: Long? = null,
+    @get:JvmExposeBoxed
+    public val guildId: DiscordId? = null,
 
     public val position: Int? = null,
 
-    // @SerialName("permission_overwrites")
-    // public val permissionOverwrites: List<Overwrite>? = null,
-    // TODO permissionOverwrites: array of overwrite objects
+    @SerialName("permission_overwrites")
+    public val permissionOverwrites: List<PermissionOverwrite>? = null,
 
     public val name: String? = null,
 
@@ -120,7 +121,8 @@ public class Channel internal constructor(
     public val nsfw: Boolean? = null,
 
     @SerialName("last_message_id")
-    public val lastMessageId: Long? = null,
+    @get:JvmExposeBoxed
+    public val lastMessageId: DiscordId? = null,
 
     public val bitrate: Int? = null,
 
@@ -130,21 +132,23 @@ public class Channel internal constructor(
     @SerialName("rate_limit_per_user")
     public val rateLimitPerUser: Int? = null,
 
-    // public val recipients: List<User>? = null,
-    // TODO recipients: array of user objects
+    public val recipients: List<User>? = null,
 
     public val icon: String? = null,
 
     @SerialName("owner_id")
-    public val ownerId: Long? = null,
+    @get:JvmExposeBoxed
+    public val ownerId: DiscordId? = null,
 
     @SerialName("application_id")
-    public val applicationId: Long? = null,
+    @get:JvmExposeBoxed
+    public val applicationId: DiscordId? = null,
 
     public val managed: Boolean? = null,
 
     @SerialName("parent_id")
-    public val parentId: Long? = null,
+    @get:JvmExposeBoxed
+    public val parentId: DiscordId? = null,
 
     @SerialName("last_pin_timestamp")
     public val lastPinTimestamp: Instant? = null,
@@ -162,12 +166,10 @@ public class Channel internal constructor(
     @SerialName("member_count")
     public val memberCount: Int? = null,
 
-    // @SerialName("thread_metadata")
-    // public val threadMetadata: ThreadMetadata? = null,
-    // TODO threadMetadata: thread metadata object
+    @SerialName("thread_metadata")
+    public val threadMetadata: ThreadMetadata? = null,
 
-    // public val member: ThreadMember? = null,
-    // TODO member: thread member object
+    public val member: ThreadMember? = null,
 
     @SerialName("default_auto_archive_duration")
     @get:JvmExposeBoxed
@@ -184,16 +186,14 @@ public class Channel internal constructor(
     @SerialName("total_message_sent")
     public val totalMessageSent: Int? = null,
 
-    // @SerialName("available_tags")
-    // public val availableTags: List<ForumTag>? = null,
-    // TODO availableTags: array of tag objects
+    @SerialName("available_tags")
+    public val availableTags: List<ForumTag>? = null,
 
     @SerialName("applied_tags")
     public val appliedTags: List<DiscordId>? = null,
 
-    // @SerialName("default_reaction_emoji")
-    // public val defaultReactionEmoji: DefaultReaction? = null,
-    // TODO defaultReactionEmoji: default reaction object
+    @SerialName("default_reaction_emoji")
+    public val defaultReactionEmoji: DefaultReaction? = null,
 
     @SerialName("default_thread_rate_limit_per_user")
     public val defaultThreadRateLimitPerUser: Int? = null,
@@ -205,4 +205,7 @@ public class Channel internal constructor(
     @SerialName("default_forum_layout")
     @get:JvmExposeBoxed
     public val defaultForumLayout: ForumLayoutType? = null,
-)
+) {
+    override fun toString(): String =
+        "Channel(id=$id, type=$type, name=$name)"
+}

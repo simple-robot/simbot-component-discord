@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024. ForteScarlet.
+ * Copyright (c) 2026. ForteScarlet.
  *
  * This file is part of simbot-component-discord.
  *
@@ -15,7 +15,7 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-package love.forte.simbot.component.discord.api.team
+package love.forte.simbot.component.discord.api.channel
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -23,29 +23,30 @@ import love.forte.simbot.component.discord.common.DiscordId
 import kotlin.jvm.JvmExposeBoxed
 
 /**
- * [Team Object](https://docs.discord.com/developers/topics/teams#data-models-team-object).
+ * [Forum Tag Object](https://docs.discord.com/developers/resources/channel#forum-tag-object).
  *
- * Represents a Developer Portal team that can own Discord applications.
+ * Defines a tag that can be applied to threads in forum and media channels.
  *
- * @property icon The team's icon hash, when set.
- * @property id The team's Discord ID.
- * @property members The members of the team.
- * @property name The team's name.
- * @property ownerUserId The Discord ID of the team's owner.
+ * @property id The tag's Discord ID.
+ * @property name The tag's name.
+ * @property moderated Whether only members with MANAGE_THREADS can add or remove
+ * the tag.
+ * @property emojiId The custom emoji ID for the tag, when present.
+ * @property emojiName The Unicode emoji name for the tag, when present.
  */
 @OptIn(ExperimentalStdlibApi::class)
 @Serializable
-public class Team internal constructor(
-    public val icon: String? = null,
+public class ForumTag internal constructor(
     @get:JvmExposeBoxed
     public val id: DiscordId,
-    public val members: List<TeamMember>,
     public val name: String,
-    @SerialName("owner_user_id")
+    public val moderated: Boolean,
+    @SerialName("emoji_id")
     @get:JvmExposeBoxed
-    public val ownerUserId: DiscordId,
+    public val emojiId: DiscordId? = null,
+    @SerialName("emoji_name")
+    public val emojiName: String? = null,
 ) {
     override fun toString(): String =
-        "Team(id=$id, name=$name, ownerUserId=$ownerUserId)"
+        "ForumTag(id=$id, name=$name, moderated=$moderated)"
 }
-

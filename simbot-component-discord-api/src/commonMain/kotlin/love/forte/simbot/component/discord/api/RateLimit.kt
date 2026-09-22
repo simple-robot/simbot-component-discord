@@ -167,6 +167,17 @@ public val RateLimitResponse.retryAfterDuration: Duration
     get() = retryAfter.seconds
 
 
+/**
+ * Cached rate-limit response headers for a request route.
+ *
+ * @property bucket The identifier of the rate limit bucket.
+ * @property limit The maximum requests allowed in the bucket.
+ * @property remaining The requests remaining in the bucket.
+ * @property reset The epoch-second timestamp when the bucket resets.
+ * @property resetAfter The seconds until the bucket resets.
+ * @property global The global rate-limit response header value.
+ * @property scope The rate-limit scope response header value.
+ */
 @Serializable
 internal data class RateLimitData(
     override val bucket: String,

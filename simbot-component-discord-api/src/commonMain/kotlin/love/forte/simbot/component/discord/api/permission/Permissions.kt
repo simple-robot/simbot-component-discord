@@ -34,6 +34,8 @@ import kotlin.jvm.JvmStatic
  * [plus] combines flags, [minus] removes flags, and [contains] checks whether
  * another flag is included in this bit field.
  *
+ * @property value The raw Discord permission bit field.
+ *
  * @see Permission
  * @see [Discord permissions](https://docs.discord.com/developers/topics/permissions)
  * @author Forte Scarlet
@@ -43,6 +45,9 @@ import kotlin.jvm.JvmStatic
 @JvmInline
 @Serializable(with = DiscordPermissionFlagSerializer::class)
 public value class Permissions private constructor(public val value: Long) {
+    /**
+     * The raw permission bit field serialized as a decimal string.
+     */
     public val stringValue: String get() = value.toString()
 
     /**
@@ -119,6 +124,8 @@ public value class Permissions private constructor(public val value: Long) {
     public val isEmpty: Boolean
         get() = value == 0L
 
+    override fun toString(): String =
+        "Permissions(value=$value)"
 }
 
 

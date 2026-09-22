@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024. ForteScarlet.
+ * Copyright (c) 2026. ForteScarlet.
  *
  * This file is part of simbot-component-discord.
  *
@@ -19,33 +19,34 @@ package love.forte.simbot.component.discord.api.team
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import love.forte.simbot.component.discord.api.user.User
 import love.forte.simbot.component.discord.common.DiscordId
 import kotlin.jvm.JvmExposeBoxed
 
 /**
- * [Team Object](https://docs.discord.com/developers/topics/teams#data-models-team-object).
+ * [Team Member Object](https://docs.discord.com/developers/topics/teams#data-models-team-member-object).
  *
- * Represents a Developer Portal team that can own Discord applications.
+ * Represents a user and their membership details in a Developer Portal team.
  *
- * @property icon The team's icon hash, when set.
- * @property id The team's Discord ID.
- * @property members The members of the team.
- * @property name The team's name.
- * @property ownerUserId The Discord ID of the team's owner.
+ * @property membershipState The member's invitation state.
+ * @property teamId The Discord ID of the team.
+ * @property user The team member's user object.
+ * @property role The member's team role.
+ * @property permissions The member's permissions, when included by Discord.
  */
 @OptIn(ExperimentalStdlibApi::class)
 @Serializable
-public class Team internal constructor(
-    public val icon: String? = null,
+public class TeamMember internal constructor(
+    @SerialName("membership_state")
     @get:JvmExposeBoxed
-    public val id: DiscordId,
-    public val members: List<TeamMember>,
-    public val name: String,
-    @SerialName("owner_user_id")
+    public val membershipState: TeamMembershipState,
+    @SerialName("team_id")
     @get:JvmExposeBoxed
-    public val ownerUserId: DiscordId,
+    public val teamId: DiscordId,
+    public val user: User,
+    public val role: String,
+    public val permissions: List<String>? = null,
 ) {
     override fun toString(): String =
-        "Team(id=$id, name=$name, ownerUserId=$ownerUserId)"
+        "TeamMember(teamId=$teamId, userId=${user.id}, role=$role)"
 }
-
