@@ -15,33 +15,24 @@
  * If not, see <https://www.gnu.org/licenses/>.
  */
 
-rootProject.name = "simbot-component-discord"
+package love.forte.simbot.component.discord.model
 
-pluginManagement {
-    includeBuild("build-logic")
+import io.ktor.http.*
+import kotlinx.serialization.DeserializationStrategy
+import love.forte.simbot.common.apidefinition.ApiDefinition
 
-    repositories {
-        mavenCentral()
-        gradlePluginPortal()
-    }
 
-    resolutionStrategy {
-        eachPlugin {
-            val pluginId = requested.id.id
-            val pluginVersion = requested.version
-            if (
-                pluginVersion != null &&
-                pluginId in setOf(
-                    "org.jetbrains.kotlin.jvm",
-                    "org.jetbrains.kotlin.multiplatform",
-                )
-            ) {
-                useModule("org.jetbrains.kotlin:kotlin-gradle-plugin:$pluginVersion")
-            }
-        }
-    }
+/**
+ * An API definition of discord API.
+ *
+ * @author ForteScarlet
+ */
+public interface DiscordApi<R : Any> : ApiDefinition<R> {
+    override val body: Any?
+    override val method: HttpMethod
+    override val resultDeserializationStrategy: DeserializationStrategy<R>
+    override val url: Url
+    override val headers: Headers
+        get() = Headers.Empty
 }
 
-include(":simbot-component-discord-common")
-include(":simbot-component-discord-model")
-include(":simbot-component-discord-model")

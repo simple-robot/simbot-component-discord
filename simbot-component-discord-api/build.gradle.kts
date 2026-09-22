@@ -29,7 +29,7 @@ plugins {
 
 setup(P.ComponentDiscord)
 
-configJavaCompileWithModule("simbot.component.discord.api")
+configJavaCompileWithModule("simbot.component.discord.model")
 apply(plugin = "simbot-discord-multiplatform-maven-publish")
 
 //configJsTestTasks()
@@ -50,7 +50,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            api(project(":simbot-component-discord-common"))
+            api(project(":simbot-component-discord-model"))
             api(libs.kotlinx.coroutines.core)
 
             api(libs.simbot.logger)
@@ -93,11 +93,11 @@ kotlin {
 }
 
 // dependencies {
-//     add("kspJvm", project(":internal-processors:api-reader"))
+//     add("kspJvm", project(":internal-processors:model-reader"))
 // }
 //
 // ksp {
-//     arg("qg.api.reader.enable", (!isCi).toString())
-//     arg("qg.api.finder.api.output", rootDir.resolve("generated-docs/api-list.md").absolutePath)
-//     arg("qg.api.finder.event.output", rootDir.resolve("generated-docs/event-list.md").absolutePath)
+//     arg("qg.model.reader.enable", (!isCi).toString())
+//     arg("qg.model.finder.model.output", rootDir.resolve("generated-docs/model-list.md").absolutePath)
+//     arg("qg.model.finder.event.output", rootDir.resolve("generated-docs/event-list.md").absolutePath)
 // }

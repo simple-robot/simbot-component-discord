@@ -52,10 +52,18 @@ It is also possible to quickly develop a powerful Discord Bot based on the simbo
 - [**Communities**](https://simbot.forte.love/communities.html): Have fun interacting with us and other developers!
 
 ## Modules
+### Model module
+
+KMP serializable models for Discord Bot resources and payloads.
+It depends only on the common types and kotlinx.serialization, without Ktor or simbot runtime abstractions.
+
+👉 [Go to Modules](simbot-component-discord-model) to learn more.
+
 ### API module
 
-Based on `Ktor`'s [KMP][KMP] implementation for [Discord API][discord bot doc],
-is a simple, efficient and lightweight API implementation module.
+Based on the [model module](simbot-component-discord-model) and `Ktor`'s [KMP][KMP]
+implementation for [Discord API][discord bot doc], this is a simple, efficient and lightweight
+API definition and implementation module.
 
 This module provides very little extra implementation.
 The goal is to preserve the feel of the original API as much as possible without overwrapping it.

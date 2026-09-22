@@ -56,16 +56,16 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            // api(libs.kotlinx.coroutines.core)
+            // model(libs.kotlinx.coroutines.core)
 
-            // api(libs.simbot.logger)
-            // api(libs.simbot.common.apidefinition)
-            // api(libs.simbot.common.suspend)
-            // api(libs.simbot.common.core)
-            // api(libs.simbot.common.annotations)
+            // model(libs.simbot.logger)
+            // model(libs.simbot.common.apidefinition)
+            // model(libs.simbot.common.suspend)
+            // model(libs.simbot.common.core)
+            // model(libs.simbot.common.annotations)
             //
-            // api(libs.ktor.client.core)
-            // api(libs.ktor.client.contentNegotiation)
+            // model(libs.ktor.client.core)
+            // model(libs.ktor.client.contentNegotiation)
             api(libs.kotlinx.serialization.core)
         }
 
@@ -78,7 +78,7 @@ kotlin {
 
         jvmTest.dependencies {
             // implementation(libs.ktor.client.cio)
-            // implementation(libs.log4j.api)
+            // implementation(libs.log4j.model)
             // implementation(libs.log4j.core)
             // implementation(libs.log4j.slf4j2)
             // implementation(libs.kotlinx.coroutines.reactor)
@@ -87,7 +87,7 @@ kotlin {
         }
 
         jsMain.dependencies {
-            // api(libs.ktor.client.js)
+            // model(libs.ktor.client.js)
         }
 
         mingwTest.dependencies {

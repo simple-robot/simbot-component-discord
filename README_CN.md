@@ -54,9 +54,16 @@ Discord Component 可以作为底层API依赖使用、
 
 ## 模块引导
 
+### 模型模块
+
+提供 Discord Bot 资源与 payload 的 KMP 可序列化模型。
+该模块只依赖公共基础类型和 kotlinx.serialization，不依赖 Ktor 或 simbot 运行时抽象。
+
+👉 [前往模块](simbot-component-discord-model) 了解更多。
+
 ### API模块
 
-基于 `Ktor` 针对 [Discord API](https://discord.com/developers/docs/intro) 
+基于 [模型模块](simbot-component-discord-model) 与 `Ktor` 针对 [Discord API](https://discord.com/developers/docs/intro)
 的基本完整的[KMP](https://kotlinlang.org/docs/multiplatform.html)多平台封装实现，
 是一个简单高效轻量级的API实现模块。
 
@@ -108,4 +115,3 @@ details.
 You should have received a copy of the GNU Lesser General Public License along with this program. 
 If not, see <https://www.gnu.org/licenses/>.
 ```
-

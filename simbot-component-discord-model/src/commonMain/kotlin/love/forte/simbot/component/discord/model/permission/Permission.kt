@@ -1,0 +1,349 @@
+/*
+ * Copyright (c) 2026. ForteScarlet.
+ *
+ * This file is part of simbot-component-discord.
+ *
+ * simbot-component-discord is free software: you can redistribute it and/or modify it under the terms
+ * of the GNU Lesser General Public License as published by the Free Software Foundation,
+ * either version 3 of the License, or (at your option) any later version.
+ *
+ * simbot-component-discord is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along with simbot-component-discord.
+ * If not, see <https://www.gnu.org/licenses/>.
+ */
+
+package love.forte.simbot.component.discord.model.permission
+
+import love.forte.simbot.component.discord.model.permission.DiscordPermissionChannelType.*
+import kotlin.jvm.JvmExposeBoxed
+
+/**
+ * [Discord permission](https://docs.discord.com/developers/topics/permissions).
+ *
+ * Represents a known permission bit and the channel types for which Discord
+ * documents that permission.
+ *
+ * @property flag The bit represented by this permission.
+ * @property channelTypes Channel types associated with this permission by
+ * Discord. An empty set means Discord does not list a channel type.
+ *
+ * @author Forte Scarlet
+ */
+@OptIn(ExperimentalStdlibApi::class)
+public enum class Permission(
+    @get:JvmExposeBoxed
+    public val flag: Permissions,
+    public val channelTypes: Set<DiscordPermissionChannelType>
+) {
+    /**
+     * Allows creation of instant invites.
+     */
+    CREATE_INSTANT_INVITE(0x0000000000000001L, TEXT, VOICE, STAGE),
+
+    /**
+     * Allows kicking members.
+     */
+    KICK_MEMBERS(0x0000000000000002L),
+
+    /**
+     * Allows banning members.
+     */
+    BAN_MEMBERS(0x0000000000000004L),
+
+    /**
+     * Allows all permissions and bypasses channel permission overwrites.
+     */
+    ADMINISTRATOR(0x0000000000000008L),
+
+    /**
+     * Allows management and editing of channels.
+     */
+    MANAGE_CHANNELS(0x0000000000000010L, TEXT, VOICE, STAGE),
+
+    /**
+     * Allows management and editing of the guild.
+     */
+    MANAGE_GUILD(0x0000000000000020L),
+
+    /**
+     * Allows for adding new reactions to messages. This permission does not
+     * apply to reacting with an existing reaction on a message.
+     */
+    ADD_REACTIONS(0x0000000000000040L, TEXT, VOICE, STAGE),
+
+    /**
+     * Allows for viewing of audit logs.
+     */
+    VIEW_AUDIT_LOG(0x0000000000000080L),
+
+    /**
+     * Allows for using priority speaker in a voice channel.
+     */
+    PRIORITY_SPEAKER(0x0000000000000100L, VOICE),
+
+    /**
+     * Allows the user to go live.
+     */
+    STREAM(0x0000000000000200L, VOICE, STAGE),
+
+    /**
+     * Allows guild members to view a channel, which includes reading messages
+     * in text channels and joining voice channels.
+     */
+    VIEW_CHANNEL(0x0000000000000400L, TEXT, VOICE, STAGE),
+
+    /**
+     * Allows for sending messages in a channel and creating threads in a
+     * forum (does not allow sending messages in threads).
+     */
+    SEND_MESSAGES(0x0000000000000800L, TEXT, VOICE, STAGE),
+
+    /**
+     * Allows for sending of `/tts` messages.
+     */
+    SEND_TTS_MESSAGES(0x0000000000001000L, TEXT, VOICE, STAGE),
+
+    /**
+     * Allows for deletion of other users messages.
+     */
+    MANAGE_MESSAGES(0x0000000000002000L, TEXT, VOICE, STAGE),
+
+    /**
+     * Links sent by users with this permission will be auto-embedded.
+     */
+    EMBED_LINKS(0x0000000000004000L, TEXT, VOICE, STAGE),
+
+    /**
+     * Allows for uploading images and files.
+     */
+    ATTACH_FILES(0x0000000000008000L, TEXT, VOICE, STAGE),
+
+    /**
+     * Allows for reading of message history.
+     */
+    READ_MESSAGE_HISTORY(0x0000000000010000L, TEXT, VOICE, STAGE),
+
+    /**
+     * Allows for using the `@everyone` tag to notify all users in a channel,
+     * and the `@here` tag to notify all online users in a channel.
+     */
+    MENTION_EVERYONE(0x0000000000020000L, TEXT, VOICE, STAGE),
+
+    /**
+     * Allows the usage of custom emojis from other servers.
+     */
+    USE_EXTERNAL_EMOJIS(0x0000000000040000L, TEXT, VOICE, STAGE),
+
+    /**
+     * Allows for viewing guild insights.
+     */
+    VIEW_GUILD_INSIGHTS(0x0000000000080000L),
+
+    /**
+     * Allows for joining of a voice channel.
+     */
+    CONNECT(0x0000000000100000L, VOICE, STAGE),
+
+    /**
+     * Allows for speaking in a voice channel.
+     */
+    SPEAK(0x0000000000200000L, VOICE),
+
+    /**
+     * Allows for muting members in a voice channel.
+     */
+    MUTE_MEMBERS(0x0000000000400000L, VOICE, STAGE),
+
+    /**
+     * Allows for deafening of members in a voice channel.
+     */
+    DEAFEN_MEMBERS(0x0000000000800000L, VOICE),
+
+    /**
+     * Allows for moving of members between voice channels.
+     */
+    MOVE_MEMBERS(0x0000000001000000L, VOICE, STAGE),
+
+    /**
+     * Allows for using voice-activity-detection in a voice channel.
+     */
+    USE_VAD(0x0000000002000000L, VOICE),
+
+    /**
+     * Allows for modification of own nickname.
+     */
+    CHANGE_NICKNAME(0x0000000004000000L),
+
+    /**
+     * Allows for modification of other users nicknames.
+     */
+    MANAGE_NICKNAMES(0x0000000008000000L),
+
+    /**
+     * Allows management and editing of roles.
+     */
+    MANAGE_ROLES(0x0000000010000000L, TEXT, VOICE, STAGE),
+
+    /**
+     * Allows management and editing of webhooks.
+     */
+    MANAGE_WEBHOOKS(0x0000000020000000L, TEXT, VOICE, STAGE),
+
+    /**
+     * Allows for editing and deleting emojis, stickers, and soundboard sounds
+     * created by all users.
+     */
+    MANAGE_GUILD_EXPRESSIONS(0x0000000040000000L),
+
+    /**
+     * Allows members to use application commands, including slash commands
+     * and context menu commands.
+     */
+    USE_APPLICATION_COMMANDS(0x0000000080000000L, TEXT, VOICE, STAGE),
+
+    /**
+     * Allows for requesting to speak in stage channels.
+     */
+    REQUEST_TO_SPEAK(0x0000000100000000L, STAGE),
+
+    /**
+     * Allows for editing and deleting scheduled events created by all users.
+     */
+    MANAGE_EVENTS(0x0000000200000000L, VOICE, STAGE),
+
+    /**
+     * Allows for deleting and archiving threads, and viewing all private
+     * threads.
+     */
+    MANAGE_THREADS(0x0000000400000000L, TEXT),
+
+    /**
+     * Allows for creating public and announcement threads.
+     */
+    CREATE_PUBLIC_THREADS(0x0000000800000000L, TEXT),
+
+    /**
+     * Allows for creating private threads.
+     */
+    CREATE_PRIVATE_THREADS(0x0000001000000000L, TEXT),
+
+    /**
+     * Allows the usage of custom stickers from other servers.
+     */
+    USE_EXTERNAL_STICKERS(0x0000002000000000L, TEXT, VOICE, STAGE),
+
+    /**
+     * Allows for sending messages in threads.
+     */
+    SEND_MESSAGES_IN_THREADS(0x0000004000000000L, TEXT),
+
+    /**
+     * Allows for using Activities (applications with the `EMBEDDED` flag).
+     */
+    USE_EMBEDDED_ACTIVITIES(0x0000008000000000L, TEXT, VOICE),
+
+    /**
+     * Allows for timing out users to prevent them from sending or reacting to
+     * messages in chat and threads, and from speaking in voice and stage
+     * channels.
+     */
+    MODERATE_MEMBERS(0x0000010000000000L),
+
+    /**
+     * Allows for viewing role subscription insights.
+     */
+    VIEW_CREATOR_MONETIZATION_ANALYTICS(0x0000020000000000L),
+
+    /**
+     * Allows for using soundboard in a voice channel.
+     */
+    USE_SOUNDBOARD(0x0000040000000000L, VOICE),
+
+    /**
+     * Allows for creating emojis, stickers, and soundboard sounds, and editing
+     * and deleting those created by the current user.
+     */
+    CREATE_GUILD_EXPRESSIONS(0x0000080000000000L),
+
+    /**
+     * Allows for creating scheduled events, and editing and deleting those
+     * created by the current user.
+     */
+    CREATE_EVENTS(0x0000100000000000L, VOICE, STAGE),
+
+    /**
+     * Allows the usage of custom soundboard sounds from other servers.
+     */
+    USE_EXTERNAL_SOUNDS(0x0000200000000000L, VOICE),
+
+    /**
+     * Allows sending voice messages.
+     */
+    SEND_VOICE_MESSAGES(0x0000400000000000L, TEXT, VOICE, STAGE),
+
+    // Bit 47 is currently unused by Discord.
+
+    /**
+     * Allows setting voice channel status.
+     */
+    SET_VOICE_CHANNEL_STATUS(0x0001000000000000L, VOICE),
+
+    /**
+     * Allows sending polls.
+     */
+    SEND_POLLS(0x0002000000000000L, TEXT, VOICE, STAGE),
+
+    /**
+     * Allows user-installed apps to send public responses. When disabled,
+     * users will still be allowed to use their apps but the responses will be
+     * ephemeral. This only applies to apps not also installed to the server.
+     */
+    USE_EXTERNAL_APPS(0x0004000000000000L, TEXT, VOICE, STAGE),
+
+    /**
+     * Allows pinning and unpinning messages.
+     */
+    PIN_MESSAGES(0x0008000000000000L, TEXT),
+
+    /**
+     * Allows bypassing slowmode restrictions.
+     */
+    BYPASS_SLOWMODE(0x0010000000000000L, TEXT, VOICE, STAGE)
+
+    ;
+
+    constructor(flag: Long, vararg channelTypes: DiscordPermissionChannelType) :
+            this(Permissions.of(flag), channelTypes.toSet())
+
+    /**
+     * The [Long] value of [flag].
+     */
+    public val flagValue: Long
+        get() = flag.value
+}
+
+/**
+ * The `Channel Type` of [DiscordPermission](https://docs.discord.com/developers/topics/permissions).
+ */
+public enum class DiscordPermissionChannelType {
+    /**
+     * `T`, text channel.
+     * Channel Types: `GUILD_TEXT, GUILD_ANNOUNCEMENT, GUILD_FORUM, GUILD_MEDIA`
+     */
+    TEXT,
+
+    /**
+     * `V`, voice channel.
+     * Channel Types: `GUILD_VOICE`
+     */
+    VOICE,
+
+    /**
+     * `S`, stage channel.
+     * Channel Types: `GUILD_STAGE_VOICE`
+     */
+    STAGE
+}
