@@ -36,23 +36,33 @@ import kotlin.jvm.JvmStatic
 @Serializable
 public value class StickerType private constructor(public val value: Int) {
     public companion object {
-        /** Raw value for [Standard]. */
+        /**
+         * Raw value for [Standard].
+         */
         public const val STANDARD_VALUE: Int = 1
 
-        /** Raw value for [Guild]. */
+        /**
+         * Raw value for [Guild].
+         */
         public const val GUILD_VALUE: Int = 2
 
-        /** An official sticker distributed in a sticker pack. */
+        /**
+         * An official sticker distributed in a sticker pack.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val Standard: StickerType = StickerType(STANDARD_VALUE)
 
-        /** A sticker uploaded to a guild. */
+        /**
+         * A sticker uploaded to a guild.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val Guild: StickerType = StickerType(GUILD_VALUE)
 
-        /** Creates a type from a raw Discord value. */
+        /**
+         * Creates a type from a raw Discord value.
+         */
         @JvmStatic
         @JvmExposeBoxed
         public fun of(value: Int): StickerType = StickerType(value)

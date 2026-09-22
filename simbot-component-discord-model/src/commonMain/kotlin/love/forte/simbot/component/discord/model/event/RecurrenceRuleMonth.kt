@@ -36,32 +36,119 @@ import kotlin.jvm.JvmStatic
 @Serializable
 public value class RecurrenceRuleMonth private constructor(public val value: Int) {
     public companion object {
-        /** January. */
-        @JvmStatic @get:JvmExposeBoxed public val January: RecurrenceRuleMonth = RecurrenceRuleMonth(1)
-        /** February. */
-        @JvmStatic @get:JvmExposeBoxed public val February: RecurrenceRuleMonth = RecurrenceRuleMonth(2)
-        /** March. */
-        @JvmStatic @get:JvmExposeBoxed public val March: RecurrenceRuleMonth = RecurrenceRuleMonth(3)
-        /** April. */
-        @JvmStatic @get:JvmExposeBoxed public val April: RecurrenceRuleMonth = RecurrenceRuleMonth(4)
-        /** May. */
-        @JvmStatic @get:JvmExposeBoxed public val May: RecurrenceRuleMonth = RecurrenceRuleMonth(5)
-        /** June. */
-        @JvmStatic @get:JvmExposeBoxed public val June: RecurrenceRuleMonth = RecurrenceRuleMonth(6)
-        /** July. */
-        @JvmStatic @get:JvmExposeBoxed public val July: RecurrenceRuleMonth = RecurrenceRuleMonth(7)
-        /** August. */
-        @JvmStatic @get:JvmExposeBoxed public val August: RecurrenceRuleMonth = RecurrenceRuleMonth(8)
-        /** September. */
-        @JvmStatic @get:JvmExposeBoxed public val September: RecurrenceRuleMonth = RecurrenceRuleMonth(9)
-        /** October. */
-        @JvmStatic @get:JvmExposeBoxed public val October: RecurrenceRuleMonth = RecurrenceRuleMonth(10)
-        /** November. */
-        @JvmStatic @get:JvmExposeBoxed public val November: RecurrenceRuleMonth = RecurrenceRuleMonth(11)
-        /** December. */
-        @JvmStatic @get:JvmExposeBoxed public val December: RecurrenceRuleMonth = RecurrenceRuleMonth(12)
+        /**
+         * Raw January value.
+         */
+        public const val JANUARY_VALUE: Int = 1
 
-        /** Creates a month from a raw Discord value. */
+        /**
+         * Raw February value.
+         */
+        public const val FEBRUARY_VALUE: Int = 2
+
+        /**
+         * Raw March value.
+         */
+        public const val MARCH_VALUE: Int = 3
+
+        /**
+         * Raw April value.
+         */
+        public const val APRIL_VALUE: Int = 4
+
+        /**
+         * Raw May value.
+         */
+        public const val MAY_VALUE: Int = 5
+
+        /**
+         * Raw June value.
+         */
+        public const val JUNE_VALUE: Int = 6
+
+        /**
+         * Raw July value.
+         */
+        public const val JULY_VALUE: Int = 7
+
+        /**
+         * Raw August value.
+         */
+        public const val AUGUST_VALUE: Int = 8
+
+        /**
+         * Raw September value.
+         */
+        public const val SEPTEMBER_VALUE: Int = 9
+
+        /**
+         * Raw October value.
+         */
+        public const val OCTOBER_VALUE: Int = 10
+
+        /**
+         * Raw November value.
+         */
+        public const val NOVEMBER_VALUE: Int = 11
+
+        /**
+         * Raw December value.
+         */
+        public const val DECEMBER_VALUE: Int = 12
+
+
+        /**
+         * January.
+         */
+        @JvmStatic @get:JvmExposeBoxed public val January: RecurrenceRuleMonth = RecurrenceRuleMonth(JANUARY_VALUE)
+        /**
+         * February.
+         */
+        @JvmStatic @get:JvmExposeBoxed public val February: RecurrenceRuleMonth = RecurrenceRuleMonth(FEBRUARY_VALUE)
+        /**
+         * March.
+         */
+        @JvmStatic @get:JvmExposeBoxed public val March: RecurrenceRuleMonth = RecurrenceRuleMonth(MARCH_VALUE)
+        /**
+         * April.
+         */
+        @JvmStatic @get:JvmExposeBoxed public val April: RecurrenceRuleMonth = RecurrenceRuleMonth(APRIL_VALUE)
+        /**
+         * May.
+         */
+        @JvmStatic @get:JvmExposeBoxed public val May: RecurrenceRuleMonth = RecurrenceRuleMonth(MAY_VALUE)
+        /**
+         * June.
+         */
+        @JvmStatic @get:JvmExposeBoxed public val June: RecurrenceRuleMonth = RecurrenceRuleMonth(JUNE_VALUE)
+        /**
+         * July.
+         */
+        @JvmStatic @get:JvmExposeBoxed public val July: RecurrenceRuleMonth = RecurrenceRuleMonth(JULY_VALUE)
+        /**
+         * August.
+         */
+        @JvmStatic @get:JvmExposeBoxed public val August: RecurrenceRuleMonth = RecurrenceRuleMonth(AUGUST_VALUE)
+        /**
+         * September.
+         */
+        @JvmStatic @get:JvmExposeBoxed public val September: RecurrenceRuleMonth = RecurrenceRuleMonth(SEPTEMBER_VALUE)
+        /**
+         * October.
+         */
+        @JvmStatic @get:JvmExposeBoxed public val October: RecurrenceRuleMonth = RecurrenceRuleMonth(OCTOBER_VALUE)
+        /**
+         * November.
+         */
+        @JvmStatic @get:JvmExposeBoxed public val November: RecurrenceRuleMonth = RecurrenceRuleMonth(NOVEMBER_VALUE)
+        /**
+         * December.
+         */
+        @JvmStatic @get:JvmExposeBoxed public val December: RecurrenceRuleMonth = RecurrenceRuleMonth(DECEMBER_VALUE)
+
+        /**
+         * Creates a month from a raw Discord value.
+         */
         @JvmStatic
         @JvmExposeBoxed
         public fun of(value: Int): RecurrenceRuleMonth = RecurrenceRuleMonth(value)

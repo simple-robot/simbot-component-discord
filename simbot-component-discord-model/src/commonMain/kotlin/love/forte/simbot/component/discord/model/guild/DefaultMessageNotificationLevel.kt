@@ -36,25 +36,35 @@ import kotlin.jvm.JvmStatic
 @Serializable
 public value class DefaultMessageNotificationLevel private constructor(public val value: Int) {
     public companion object {
-        /** Raw value for [AllMessages]. */
+        /**
+         * Raw value for [AllMessages].
+         */
         public const val ALL_MESSAGES_VALUE: Int = 0
 
-        /** Raw value for [OnlyMentions]. */
+        /**
+         * Raw value for [OnlyMentions].
+         */
         public const val ONLY_MENTIONS_VALUE: Int = 1
 
-        /** Members receive notifications for all messages by default. */
+        /**
+         * Members receive notifications for all messages by default.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val AllMessages: DefaultMessageNotificationLevel =
             DefaultMessageNotificationLevel(ALL_MESSAGES_VALUE)
 
-        /** Members receive notifications only for messages that mention them. */
+        /**
+         * Members receive notifications only for messages that mention them.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val OnlyMentions: DefaultMessageNotificationLevel =
             DefaultMessageNotificationLevel(ONLY_MENTIONS_VALUE)
 
-        /** Creates a level from a raw Discord value. */
+        /**
+         * Creates a level from a raw Discord value.
+         */
         @JvmStatic
         @JvmExposeBoxed
         public fun of(value: Int): DefaultMessageNotificationLevel =

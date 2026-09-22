@@ -36,23 +36,33 @@ import kotlin.jvm.JvmStatic
 @Serializable
 public value class StagePrivacyLevel private constructor(public val value: Int) {
     public companion object {
-        /** Raw deprecated public privacy level value. */
+        /**
+         * Raw deprecated public privacy level value.
+         */
         public const val PUBLIC_VALUE: Int = 1
 
-        /** Raw guild-only privacy level value. */
+        /**
+         * Raw guild-only privacy level value.
+         */
         public const val GUILD_ONLY_VALUE: Int = 2
 
-        /** A deprecated publicly visible stage. */
+        /**
+         * A deprecated publicly visible stage.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val Public: StagePrivacyLevel = StagePrivacyLevel(PUBLIC_VALUE)
 
-        /** A stage visible only to guild members. */
+        /**
+         * A stage visible only to guild members.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val GuildOnly: StagePrivacyLevel = StagePrivacyLevel(GUILD_ONLY_VALUE)
 
-        /** Creates a level from a raw Discord value. */
+        /**
+         * Creates a level from a raw Discord value.
+         */
         @JvmStatic
         @JvmExposeBoxed
         public fun of(value: Int): StagePrivacyLevel = StagePrivacyLevel(value)

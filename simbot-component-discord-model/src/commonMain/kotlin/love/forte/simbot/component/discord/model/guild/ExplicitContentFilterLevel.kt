@@ -36,34 +36,48 @@ import kotlin.jvm.JvmStatic
 @Serializable
 public value class ExplicitContentFilterLevel private constructor(public val value: Int) {
     public companion object {
-        /** Raw value for [Disabled]. */
+        /**
+         * Raw value for [Disabled].
+         */
         public const val DISABLED_VALUE: Int = 0
 
-        /** Raw value for [MembersWithoutRoles]. */
+        /**
+         * Raw value for [MembersWithoutRoles].
+         */
         public const val MEMBERS_WITHOUT_ROLES_VALUE: Int = 1
 
-        /** Raw value for [AllMembers]. */
+        /**
+         * Raw value for [AllMembers].
+         */
         public const val ALL_MEMBERS_VALUE: Int = 2
 
-        /** Media content is not scanned. */
+        /**
+         * Media content is not scanned.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val Disabled: ExplicitContentFilterLevel =
             ExplicitContentFilterLevel(DISABLED_VALUE)
 
-        /** Media content from members without roles is scanned. */
+        /**
+         * Media content from members without roles is scanned.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val MembersWithoutRoles: ExplicitContentFilterLevel =
             ExplicitContentFilterLevel(MEMBERS_WITHOUT_ROLES_VALUE)
 
-        /** Media content from all members is scanned. */
+        /**
+         * Media content from all members is scanned.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val AllMembers: ExplicitContentFilterLevel =
             ExplicitContentFilterLevel(ALL_MEMBERS_VALUE)
 
-        /** Creates a level from a raw Discord value. */
+        /**
+         * Creates a level from a raw Discord value.
+         */
         @JvmStatic
         @JvmExposeBoxed
         public fun of(value: Int): ExplicitContentFilterLevel =

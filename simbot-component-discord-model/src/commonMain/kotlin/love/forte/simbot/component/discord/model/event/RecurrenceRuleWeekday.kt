@@ -36,22 +36,74 @@ import kotlin.jvm.JvmStatic
 @Serializable
 public value class RecurrenceRuleWeekday private constructor(public val value: Int) {
     public companion object {
-        /** Monday. */
-        @JvmStatic @get:JvmExposeBoxed public val Monday: RecurrenceRuleWeekday = RecurrenceRuleWeekday(0)
-        /** Tuesday. */
-        @JvmStatic @get:JvmExposeBoxed public val Tuesday: RecurrenceRuleWeekday = RecurrenceRuleWeekday(1)
-        /** Wednesday. */
-        @JvmStatic @get:JvmExposeBoxed public val Wednesday: RecurrenceRuleWeekday = RecurrenceRuleWeekday(2)
-        /** Thursday. */
-        @JvmStatic @get:JvmExposeBoxed public val Thursday: RecurrenceRuleWeekday = RecurrenceRuleWeekday(3)
-        /** Friday. */
-        @JvmStatic @get:JvmExposeBoxed public val Friday: RecurrenceRuleWeekday = RecurrenceRuleWeekday(4)
-        /** Saturday. */
-        @JvmStatic @get:JvmExposeBoxed public val Saturday: RecurrenceRuleWeekday = RecurrenceRuleWeekday(5)
-        /** Sunday. */
-        @JvmStatic @get:JvmExposeBoxed public val Sunday: RecurrenceRuleWeekday = RecurrenceRuleWeekday(6)
+        /**
+         * Raw Monday value.
+         */
+        public const val MONDAY_VALUE: Int = 0
 
-        /** Creates a weekday from a raw Discord value. */
+        /**
+         * Raw Tuesday value.
+         */
+        public const val TUESDAY_VALUE: Int = 1
+
+        /**
+         * Raw Wednesday value.
+         */
+        public const val WEDNESDAY_VALUE: Int = 2
+
+        /**
+         * Raw Thursday value.
+         */
+        public const val THURSDAY_VALUE: Int = 3
+
+        /**
+         * Raw Friday value.
+         */
+        public const val FRIDAY_VALUE: Int = 4
+
+        /**
+         * Raw Saturday value.
+         */
+        public const val SATURDAY_VALUE: Int = 5
+
+        /**
+         * Raw Sunday value.
+         */
+        public const val SUNDAY_VALUE: Int = 6
+
+
+        /**
+         * Monday.
+         */
+        @JvmStatic @get:JvmExposeBoxed public val Monday: RecurrenceRuleWeekday = RecurrenceRuleWeekday(MONDAY_VALUE)
+        /**
+         * Tuesday.
+         */
+        @JvmStatic @get:JvmExposeBoxed public val Tuesday: RecurrenceRuleWeekday = RecurrenceRuleWeekday(TUESDAY_VALUE)
+        /**
+         * Wednesday.
+         */
+        @JvmStatic @get:JvmExposeBoxed public val Wednesday: RecurrenceRuleWeekday = RecurrenceRuleWeekday(WEDNESDAY_VALUE)
+        /**
+         * Thursday.
+         */
+        @JvmStatic @get:JvmExposeBoxed public val Thursday: RecurrenceRuleWeekday = RecurrenceRuleWeekday(THURSDAY_VALUE)
+        /**
+         * Friday.
+         */
+        @JvmStatic @get:JvmExposeBoxed public val Friday: RecurrenceRuleWeekday = RecurrenceRuleWeekday(FRIDAY_VALUE)
+        /**
+         * Saturday.
+         */
+        @JvmStatic @get:JvmExposeBoxed public val Saturday: RecurrenceRuleWeekday = RecurrenceRuleWeekday(SATURDAY_VALUE)
+        /**
+         * Sunday.
+         */
+        @JvmStatic @get:JvmExposeBoxed public val Sunday: RecurrenceRuleWeekday = RecurrenceRuleWeekday(SUNDAY_VALUE)
+
+        /**
+         * Creates a weekday from a raw Discord value.
+         */
         @JvmStatic
         @JvmExposeBoxed
         public fun of(value: Int): RecurrenceRuleWeekday = RecurrenceRuleWeekday(value)

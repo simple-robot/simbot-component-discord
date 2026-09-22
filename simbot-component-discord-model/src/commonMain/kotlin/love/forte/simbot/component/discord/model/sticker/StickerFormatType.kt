@@ -36,39 +36,57 @@ import kotlin.jvm.JvmStatic
 @Serializable
 public value class StickerFormatType private constructor(public val value: Int) {
     public companion object {
-        /** Raw PNG format value. */
+        /**
+         * Raw PNG format value.
+         */
         public const val PNG_VALUE: Int = 1
 
-        /** Raw APNG format value. */
+        /**
+         * Raw APNG format value.
+         */
         public const val APNG_VALUE: Int = 2
 
-        /** Raw Lottie format value. */
+        /**
+         * Raw Lottie format value.
+         */
         public const val LOTTIE_VALUE: Int = 3
 
-        /** Raw GIF format value. */
+        /**
+         * Raw GIF format value.
+         */
         public const val GIF_VALUE: Int = 4
 
-        /** A PNG sticker. */
+        /**
+         * A PNG sticker.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val Png: StickerFormatType = StickerFormatType(PNG_VALUE)
 
-        /** An animated PNG sticker. */
+        /**
+         * An animated PNG sticker.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val Apng: StickerFormatType = StickerFormatType(APNG_VALUE)
 
-        /** A Lottie JSON sticker. */
+        /**
+         * A Lottie JSON sticker.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val Lottie: StickerFormatType = StickerFormatType(LOTTIE_VALUE)
 
-        /** A GIF sticker. */
+        /**
+         * A GIF sticker.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val Gif: StickerFormatType = StickerFormatType(GIF_VALUE)
 
-        /** Creates a format from a raw Discord value. */
+        /**
+         * Creates a format from a raw Discord value.
+         */
         @JvmStatic
         @JvmExposeBoxed
         public fun of(value: Int): StickerFormatType = StickerFormatType(value)

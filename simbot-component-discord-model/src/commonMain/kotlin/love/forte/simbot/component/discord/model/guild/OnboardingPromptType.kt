@@ -36,24 +36,34 @@ import kotlin.jvm.JvmStatic
 @Serializable
 public value class OnboardingPromptType private constructor(public val value: Int) {
     public companion object {
-        /** Raw multiple-choice prompt value. */
+        /**
+         * Raw multiple-choice prompt value.
+         */
         public const val MULTIPLE_CHOICE_VALUE: Int = 0
 
-        /** Raw dropdown prompt value. */
+        /**
+         * Raw dropdown prompt value.
+         */
         public const val DROPDOWN_VALUE: Int = 1
 
-        /** A multiple-choice prompt. */
+        /**
+         * A multiple-choice prompt.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val MultipleChoice: OnboardingPromptType =
             OnboardingPromptType(MULTIPLE_CHOICE_VALUE)
 
-        /** A dropdown prompt. */
+        /**
+         * A dropdown prompt.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val Dropdown: OnboardingPromptType = OnboardingPromptType(DROPDOWN_VALUE)
 
-        /** Creates a type from a raw Discord value. */
+        /**
+         * Creates a type from a raw Discord value.
+         */
         @JvmStatic
         @JvmExposeBoxed
         public fun of(value: Int): OnboardingPromptType = OnboardingPromptType(value)

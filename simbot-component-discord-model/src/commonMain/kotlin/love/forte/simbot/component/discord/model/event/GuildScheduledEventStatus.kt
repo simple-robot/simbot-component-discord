@@ -36,43 +36,61 @@ import kotlin.jvm.JvmStatic
 @Serializable
 public value class GuildScheduledEventStatus private constructor(public val value: Int) {
     public companion object {
-        /** Raw scheduled status value. */
+        /**
+         * Raw scheduled status value.
+         */
         public const val SCHEDULED_VALUE: Int = 1
 
-        /** Raw active status value. */
+        /**
+         * Raw active status value.
+         */
         public const val ACTIVE_VALUE: Int = 2
 
-        /** Raw completed status value. */
+        /**
+         * Raw completed status value.
+         */
         public const val COMPLETED_VALUE: Int = 3
 
-        /** Raw canceled status value. */
+        /**
+         * Raw canceled status value.
+         */
         public const val CANCELED_VALUE: Int = 4
 
-        /** The event has not started. */
+        /**
+         * The event has not started.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val Scheduled: GuildScheduledEventStatus =
             GuildScheduledEventStatus(SCHEDULED_VALUE)
 
-        /** The event is currently active. */
+        /**
+         * The event is currently active.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val Active: GuildScheduledEventStatus =
             GuildScheduledEventStatus(ACTIVE_VALUE)
 
-        /** The event has completed. */
+        /**
+         * The event has completed.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val Completed: GuildScheduledEventStatus =
             GuildScheduledEventStatus(COMPLETED_VALUE)
 
-        /** The event was canceled. */
+        /**
+         * The event was canceled.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val Canceled: GuildScheduledEventStatus =
             GuildScheduledEventStatus(CANCELED_VALUE)
 
-        /** Creates a status from a raw Discord value. */
+        /**
+         * Creates a status from a raw Discord value.
+         */
         @JvmStatic
         @JvmExposeBoxed
         public fun of(value: Int): GuildScheduledEventStatus =

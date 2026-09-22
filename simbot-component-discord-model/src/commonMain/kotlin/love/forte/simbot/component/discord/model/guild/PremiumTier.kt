@@ -36,39 +36,57 @@ import kotlin.jvm.JvmStatic
 @Serializable
 public value class PremiumTier private constructor(public val value: Int) {
     public companion object {
-        /** Raw value for [None]. */
+        /**
+         * Raw value for [None].
+         */
         public const val NONE_VALUE: Int = 0
 
-        /** Raw value for [Tier1]. */
+        /**
+         * Raw value for [Tier1].
+         */
         public const val TIER_1_VALUE: Int = 1
 
-        /** Raw value for [Tier2]. */
+        /**
+         * Raw value for [Tier2].
+         */
         public const val TIER_2_VALUE: Int = 2
 
-        /** Raw value for [Tier3]. */
+        /**
+         * Raw value for [Tier3].
+         */
         public const val TIER_3_VALUE: Int = 3
 
-        /** The guild has not unlocked Server Boost perks. */
+        /**
+         * The guild has not unlocked Server Boost perks.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val None: PremiumTier = PremiumTier(NONE_VALUE)
 
-        /** The guild has unlocked Server Boost level 1 perks. */
+        /**
+         * The guild has unlocked Server Boost level 1 perks.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val Tier1: PremiumTier = PremiumTier(TIER_1_VALUE)
 
-        /** The guild has unlocked Server Boost level 2 perks. */
+        /**
+         * The guild has unlocked Server Boost level 2 perks.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val Tier2: PremiumTier = PremiumTier(TIER_2_VALUE)
 
-        /** The guild has unlocked Server Boost level 3 perks. */
+        /**
+         * The guild has unlocked Server Boost level 3 perks.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val Tier3: PremiumTier = PremiumTier(TIER_3_VALUE)
 
-        /** Creates a tier from a raw Discord value. */
+        /**
+         * Creates a tier from a raw Discord value.
+         */
         @JvmStatic
         @JvmExposeBoxed
         public fun of(value: Int): PremiumTier = PremiumTier(value)

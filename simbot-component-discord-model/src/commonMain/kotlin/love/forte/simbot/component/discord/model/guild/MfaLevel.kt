@@ -36,23 +36,33 @@ import kotlin.jvm.JvmStatic
 @Serializable
 public value class MfaLevel private constructor(public val value: Int) {
     public companion object {
-        /** Raw value for [None]. */
+        /**
+         * Raw value for [None].
+         */
         public const val NONE_VALUE: Int = 0
 
-        /** Raw value for [Elevated]. */
+        /**
+         * Raw value for [Elevated].
+         */
         public const val ELEVATED_VALUE: Int = 1
 
-        /** Moderation actions do not require two-factor authentication. */
+        /**
+         * Moderation actions do not require two-factor authentication.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val None: MfaLevel = MfaLevel(NONE_VALUE)
 
-        /** Moderation actions require two-factor authentication. */
+        /**
+         * Moderation actions require two-factor authentication.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val Elevated: MfaLevel = MfaLevel(ELEVATED_VALUE)
 
-        /** Creates a level from a raw Discord value. */
+        /**
+         * Creates a level from a raw Discord value.
+         */
         @JvmStatic
         @JvmExposeBoxed
         public fun of(value: Int): MfaLevel = MfaLevel(value)

@@ -36,23 +36,33 @@ import kotlin.jvm.JvmStatic
 @Serializable
 public value class OnboardingMode private constructor(public val value: Int) {
     public companion object {
-        /** Raw default-channel-only mode value. */
+        /**
+         * Raw default-channel-only mode value.
+         */
         public const val DEFAULT_VALUE: Int = 0
 
-        /** Raw advanced mode value. */
+        /**
+         * Raw advanced mode value.
+         */
         public const val ADVANCED_VALUE: Int = 1
 
-        /** Only default channels count toward onboarding constraints. */
+        /**
+         * Only default channels count toward onboarding constraints.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val Default: OnboardingMode = OnboardingMode(DEFAULT_VALUE)
 
-        /** Default channels and questions count toward onboarding constraints. */
+        /**
+         * Default channels and questions count toward onboarding constraints.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val Advanced: OnboardingMode = OnboardingMode(ADVANCED_VALUE)
 
-        /** Creates a mode from a raw Discord value. */
+        /**
+         * Creates a mode from a raw Discord value.
+         */
         @JvmStatic
         @JvmExposeBoxed
         public fun of(value: Int): OnboardingMode = OnboardingMode(value)

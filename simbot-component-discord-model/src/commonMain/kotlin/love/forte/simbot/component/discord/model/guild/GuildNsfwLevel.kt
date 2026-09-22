@@ -36,39 +36,57 @@ import kotlin.jvm.JvmStatic
 @Serializable
 public value class GuildNsfwLevel private constructor(public val value: Int) {
     public companion object {
-        /** Raw value for [Default]. */
+        /**
+         * Raw value for [Default].
+         */
         public const val DEFAULT_VALUE: Int = 0
 
-        /** Raw value for [Explicit]. */
+        /**
+         * Raw value for [Explicit].
+         */
         public const val EXPLICIT_VALUE: Int = 1
 
-        /** Raw value for [Safe]. */
+        /**
+         * Raw value for [Safe].
+         */
         public const val SAFE_VALUE: Int = 2
 
-        /** Raw value for [AgeRestricted]. */
+        /**
+         * Raw value for [AgeRestricted].
+         */
         public const val AGE_RESTRICTED_VALUE: Int = 3
 
-        /** The guild uses Discord's default classification. */
+        /**
+         * The guild uses Discord's default classification.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val Default: GuildNsfwLevel = GuildNsfwLevel(DEFAULT_VALUE)
 
-        /** The guild is classified as explicit. */
+        /**
+         * The guild is classified as explicit.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val Explicit: GuildNsfwLevel = GuildNsfwLevel(EXPLICIT_VALUE)
 
-        /** The guild is classified as safe. */
+        /**
+         * The guild is classified as safe.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val Safe: GuildNsfwLevel = GuildNsfwLevel(SAFE_VALUE)
 
-        /** The guild is age-restricted. */
+        /**
+         * The guild is age-restricted.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val AgeRestricted: GuildNsfwLevel = GuildNsfwLevel(AGE_RESTRICTED_VALUE)
 
-        /** Creates a level from a raw Discord value. */
+        /**
+         * Creates a level from a raw Discord value.
+         */
         @JvmStatic
         @JvmExposeBoxed
         public fun of(value: Int): GuildNsfwLevel = GuildNsfwLevel(value)

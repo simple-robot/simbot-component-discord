@@ -36,27 +36,61 @@ import kotlin.jvm.JvmStatic
 @Serializable
 public value class RecurrenceRuleFrequency private constructor(public val value: Int) {
     public companion object {
-        /** A yearly recurrence. */
+        /**
+         * Raw yearly recurrence value.
+         */
+        public const val YEARLY_VALUE: Int = 0
+
+
+        /**
+         * Raw monthly recurrence value.
+         */
+        public const val MONTHLY_VALUE: Int = 1
+
+
+        /**
+         * Raw weekly recurrence value.
+         */
+        public const val WEEKLY_VALUE: Int = 2
+
+
+        /**
+         * Raw daily recurrence value.
+         */
+        public const val DAILY_VALUE: Int = 3
+
+
+        /**
+         * A yearly recurrence.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
-        public val Yearly: RecurrenceRuleFrequency = RecurrenceRuleFrequency(0)
+        public val Yearly: RecurrenceRuleFrequency = RecurrenceRuleFrequency(YEARLY_VALUE)
 
-        /** A monthly recurrence. */
+        /**
+         * A monthly recurrence.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
-        public val Monthly: RecurrenceRuleFrequency = RecurrenceRuleFrequency(1)
+        public val Monthly: RecurrenceRuleFrequency = RecurrenceRuleFrequency(MONTHLY_VALUE)
 
-        /** A weekly recurrence. */
+        /**
+         * A weekly recurrence.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
-        public val Weekly: RecurrenceRuleFrequency = RecurrenceRuleFrequency(2)
+        public val Weekly: RecurrenceRuleFrequency = RecurrenceRuleFrequency(WEEKLY_VALUE)
 
-        /** A daily recurrence. */
+        /**
+         * A daily recurrence.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
-        public val Daily: RecurrenceRuleFrequency = RecurrenceRuleFrequency(3)
+        public val Daily: RecurrenceRuleFrequency = RecurrenceRuleFrequency(DAILY_VALUE)
 
-        /** Creates a frequency from a raw Discord value. */
+        /**
+         * Creates a frequency from a raw Discord value.
+         */
         @JvmStatic
         @JvmExposeBoxed
         public fun of(value: Int): RecurrenceRuleFrequency = RecurrenceRuleFrequency(value)

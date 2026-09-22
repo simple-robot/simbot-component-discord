@@ -36,24 +36,34 @@ import kotlin.jvm.JvmStatic
 @Serializable
 public value class IntegrationExpireBehavior private constructor(public val value: Int) {
     public companion object {
-        /** Raw value for [RemoveRole]. */
+        /**
+         * Raw value for [RemoveRole].
+         */
         public const val REMOVE_ROLE_VALUE: Int = 0
 
-        /** Raw value for [Kick]. */
+        /**
+         * Raw value for [Kick].
+         */
         public const val KICK_VALUE: Int = 1
 
-        /** Remove the integration's subscriber role. */
+        /**
+         * Remove the integration's subscriber role.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val RemoveRole: IntegrationExpireBehavior =
             IntegrationExpireBehavior(REMOVE_ROLE_VALUE)
 
-        /** Remove the expired subscriber from the guild. */
+        /**
+         * Remove the expired subscriber from the guild.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val Kick: IntegrationExpireBehavior = IntegrationExpireBehavior(KICK_VALUE)
 
-        /** Creates a behavior from a raw Discord value. */
+        /**
+         * Creates a behavior from a raw Discord value.
+         */
         @JvmStatic
         @JvmExposeBoxed
         public fun of(value: Int): IntegrationExpireBehavior =

@@ -35,16 +35,22 @@ import kotlin.jvm.JvmStatic
 @Serializable
 public value class GuildScheduledEventPrivacyLevel private constructor(public val value: Int) {
     public companion object {
-        /** Raw guild-only privacy level value. */
+        /**
+         * Raw guild-only privacy level value.
+         */
         public const val GUILD_ONLY_VALUE: Int = 2
 
-        /** The event is accessible only to guild members. */
+        /**
+         * The event is accessible only to guild members.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val GuildOnly: GuildScheduledEventPrivacyLevel =
             GuildScheduledEventPrivacyLevel(GUILD_ONLY_VALUE)
 
-        /** Creates a level from a raw Discord value. */
+        /**
+         * Creates a level from a raw Discord value.
+         */
         @JvmStatic
         @JvmExposeBoxed
         public fun of(value: Int): GuildScheduledEventPrivacyLevel =

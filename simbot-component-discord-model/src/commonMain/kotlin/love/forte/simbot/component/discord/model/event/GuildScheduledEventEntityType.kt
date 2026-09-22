@@ -36,34 +36,48 @@ import kotlin.jvm.JvmStatic
 @Serializable
 public value class GuildScheduledEventEntityType private constructor(public val value: Int) {
     public companion object {
-        /** Raw stage instance entity type value. */
+        /**
+         * Raw stage instance entity type value.
+         */
         public const val STAGE_INSTANCE_VALUE: Int = 1
 
-        /** Raw voice entity type value. */
+        /**
+         * Raw voice entity type value.
+         */
         public const val VOICE_VALUE: Int = 2
 
-        /** Raw external entity type value. */
+        /**
+         * Raw external entity type value.
+         */
         public const val EXTERNAL_VALUE: Int = 3
 
-        /** An event hosted in a stage channel. */
+        /**
+         * An event hosted in a stage channel.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val StageInstance: GuildScheduledEventEntityType =
             GuildScheduledEventEntityType(STAGE_INSTANCE_VALUE)
 
-        /** An event hosted in a voice channel. */
+        /**
+         * An event hosted in a voice channel.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val Voice: GuildScheduledEventEntityType =
             GuildScheduledEventEntityType(VOICE_VALUE)
 
-        /** An event hosted at an external location. */
+        /**
+         * An event hosted at an external location.
+         */
         @JvmStatic
         @get:JvmExposeBoxed
         public val External: GuildScheduledEventEntityType =
             GuildScheduledEventEntityType(EXTERNAL_VALUE)
 
-        /** Creates a type from a raw Discord value. */
+        /**
+         * Creates a type from a raw Discord value.
+         */
         @JvmStatic
         @JvmExposeBoxed
         public fun of(value: Int): GuildScheduledEventEntityType =
