@@ -17,6 +17,7 @@
 
 package love.forte.simbot.component.discord.model.contract
 
+import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 import love.forte.simbot.component.discord.model.event.GuildScheduledEventEntityType
 import love.forte.simbot.component.discord.model.event.GuildScheduledEventPrivacyLevel
@@ -39,6 +40,8 @@ import love.forte.simbot.component.discord.model.guild.SystemChannelFlags
 import love.forte.simbot.component.discord.model.guild.VerificationLevel
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFails
+import kotlin.test.assertIs
 
 /**
  * Covers open guild and scheduled-event values, including unknown feature
@@ -64,8 +67,12 @@ class GuildAndEventUnknownValueTests {
         assertUnknownInt { Json.decodeFromString<GuildScheduledEventPrivacyLevel>(it).value }
         assertUnknownInt { Json.decodeFromString<GuildScheduledEventStatus>(it).value }
         assertUnknownInt { Json.decodeFromString<RecurrenceRuleFrequency>(it).value }
-        assertUnknownInt { Json.decodeFromString<RecurrenceRuleMonth>(it).value }
-        assertUnknownInt { Json.decodeFromString<RecurrenceRuleWeekday>(it).value }
+        assertIs<SerializationException>(
+            assertFails { Json.decodeFromString<RecurrenceRuleMonth>(UNKNOWN_INT.toString()).value }
+        )
+        assertIs<SerializationException>(
+            assertFails { Json.decodeFromString<RecurrenceRuleWeekday>(UNKNOWN_INT.toString()).value }
+        )
     }
 
     @Test

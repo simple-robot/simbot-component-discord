@@ -17,10 +17,14 @@
 
 package love.forte.simbot.component.discord.model.event
 
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlin.jvm.JvmExposeBoxed
-import kotlin.jvm.JvmInline
-import kotlin.jvm.JvmStatic
+import kotlinx.serialization.SerializationException
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 /**
  * [Recurrence Rule Weekday](https://docs.discord.com/developers/resources/guild-scheduled-event#guild-scheduled-event-recurrence-rule-object-guild-scheduled-event-recurrence-rule-weekday).
@@ -30,84 +34,69 @@ import kotlin.jvm.JvmStatic
  *
  * @property value The raw Discord weekday value, where Monday is zero.
  */
-@OptIn(ExperimentalStdlibApi::class)
-@JvmInline
-@JvmExposeBoxed
-@Serializable
-public value class RecurrenceRuleWeekday private constructor(public val value: Int) {
-    public companion object {
-        /**
-         * Raw Monday value.
-         */
-        public const val MONDAY_VALUE: Int = 0
+@Serializable(RecurrenceRuleWeekdaySerializer::class)
+public enum class RecurrenceRuleWeekday(public val value: Int) {
+    /**
+     * Monday.
+     */
+    MONDAY(0),
 
-        /**
-         * Raw Tuesday value.
-         */
-        public const val TUESDAY_VALUE: Int = 1
+    /**
+     * Tuesday.
+     */
+    TUESDAY(1),
 
-        /**
-         * Raw Wednesday value.
-         */
-        public const val WEDNESDAY_VALUE: Int = 2
+    /**
+     * Wednesday.
+     */
+    WEDNESDAY(2),
 
-        /**
-         * Raw Thursday value.
-         */
-        public const val THURSDAY_VALUE: Int = 3
+    /**
+     * Thursday.
+     */
+    THURSDAY(3),
 
-        /**
-         * Raw Friday value.
-         */
-        public const val FRIDAY_VALUE: Int = 4
+    /**
+     * Friday.
+     */
+    FRIDAY(4),
 
-        /**
-         * Raw Saturday value.
-         */
-        public const val SATURDAY_VALUE: Int = 5
+    /**
+     * Saturday.
+     */
+    SATURDAY(5),
 
-        /**
-         * Raw Sunday value.
-         */
-        public const val SUNDAY_VALUE: Int = 6
+    /**
+     * Sunday.
+     */
+    SUNDAY(6)
+}
 
+/**
+ * A serializer for the [RecurrenceRuleWeekday] enum, which represents a weekday in a scheduled event recurrence rule.
+ *
+ * This serializer handles the mapping between the [RecurrenceRuleWeekday] object and its integer representation as defined by Discord's API.
+ * It ensures that only valid weekday values (0 through 6) are serializable and deserializable.
+ *
+ * - During serialization, the [RecurrenceRuleWeekday] is encoded as an integer corresponding to its `value` property.
+ * - During deserialization, the integer value is validated to ensure it represents a valid weekday. If the value is invalid,
+ *   a [SerializationException] is thrown.
+ *
+ * Throws:
+ * - [SerializationException] if a deserialized value is outside the valid range of 0 to 6.
+ */
+internal object RecurrenceRuleWeekdaySerializer : KSerializer<RecurrenceRuleWeekday> {
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("RecurrenceRuleWeekday", PrimitiveKind.INT)
 
-        /**
-         * Monday.
-         */
-        @JvmStatic @get:JvmExposeBoxed public val Monday: RecurrenceRuleWeekday = RecurrenceRuleWeekday(MONDAY_VALUE)
-        /**
-         * Tuesday.
-         */
-        @JvmStatic @get:JvmExposeBoxed public val Tuesday: RecurrenceRuleWeekday = RecurrenceRuleWeekday(TUESDAY_VALUE)
-        /**
-         * Wednesday.
-         */
-        @JvmStatic @get:JvmExposeBoxed public val Wednesday: RecurrenceRuleWeekday = RecurrenceRuleWeekday(WEDNESDAY_VALUE)
-        /**
-         * Thursday.
-         */
-        @JvmStatic @get:JvmExposeBoxed public val Thursday: RecurrenceRuleWeekday = RecurrenceRuleWeekday(THURSDAY_VALUE)
-        /**
-         * Friday.
-         */
-        @JvmStatic @get:JvmExposeBoxed public val Friday: RecurrenceRuleWeekday = RecurrenceRuleWeekday(FRIDAY_VALUE)
-        /**
-         * Saturday.
-         */
-        @JvmStatic @get:JvmExposeBoxed public val Saturday: RecurrenceRuleWeekday = RecurrenceRuleWeekday(SATURDAY_VALUE)
-        /**
-         * Sunday.
-         */
-        @JvmStatic @get:JvmExposeBoxed public val Sunday: RecurrenceRuleWeekday = RecurrenceRuleWeekday(SUNDAY_VALUE)
-
-        /**
-         * Creates a weekday from a raw Discord value.
-         */
-        @JvmStatic
-        @JvmExposeBoxed
-        public fun of(value: Int): RecurrenceRuleWeekday = RecurrenceRuleWeekday(value)
+    override fun serialize(encoder: Encoder, value: RecurrenceRuleWeekday) {
+        encoder.encodeInt(value.value)
     }
 
-    override fun toString(): String = "RecurrenceRuleWeekday(value=$value)"
+    override fun deserialize(decoder: Decoder): RecurrenceRuleWeekday {
+        val value = decoder.decodeInt()
+        if (value !in 0..6) {
+            throw SerializationException("Invalid RecurrenceRuleWeekday value: $value")
+        }
+        return RecurrenceRuleWeekday.entries[value]
+    }
 }

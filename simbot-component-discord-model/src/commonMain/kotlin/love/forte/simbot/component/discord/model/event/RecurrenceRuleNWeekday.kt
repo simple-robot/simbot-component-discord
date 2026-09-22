@@ -18,7 +18,6 @@
 package love.forte.simbot.component.discord.model.event
 
 import kotlinx.serialization.Serializable
-import kotlin.jvm.JvmExposeBoxed
 
 /**
  * [Recurrence Rule N-Weekday Structure](https://docs.discord.com/developers/resources/guild-scheduled-event#guild-scheduled-event-recurrence-rule-object-guild-scheduled-event-recurrence-rule-nweekday-structure).
@@ -32,7 +31,6 @@ import kotlin.jvm.JvmExposeBoxed
 @Serializable
 public class RecurrenceRuleNWeekday internal constructor(
     public val n: Int,
-    @get:JvmExposeBoxed
     public val day: RecurrenceRuleWeekday,
 ) {
     override fun toString(): String = "RecurrenceRuleNWeekday(n=$n, day=$day)"

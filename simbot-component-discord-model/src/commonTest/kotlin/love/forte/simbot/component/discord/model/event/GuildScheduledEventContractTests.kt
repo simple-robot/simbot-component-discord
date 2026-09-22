@@ -79,6 +79,6 @@ class GuildScheduledEventContractTests {
 
         assertEquals(RecurrenceRuleFrequency.Monthly, recurrence.frequency)
         assertEquals(4, recurrence.byNWeekday?.single()?.n)
-        assertEquals(RecurrenceRuleWeekday.Wednesday, recurrence.byNWeekday?.single()?.day)
+        assertEquals(RecurrenceRuleWeekday.WEDNESDAY, recurrence.byNWeekday?.single()?.day)
     }
 }

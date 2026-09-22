@@ -17,10 +17,14 @@
 
 package love.forte.simbot.component.discord.model.event
 
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlin.jvm.JvmExposeBoxed
-import kotlin.jvm.JvmInline
-import kotlin.jvm.JvmStatic
+import kotlinx.serialization.SerializationException
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 /**
  * [Recurrence Rule Month](https://docs.discord.com/developers/resources/guild-scheduled-event#guild-scheduled-event-recurrence-rule-object-guild-scheduled-event-recurrence-rule-month).
@@ -30,129 +34,94 @@ import kotlin.jvm.JvmStatic
  *
  * @property value The raw Discord month value from 1 through 12.
  */
-@OptIn(ExperimentalStdlibApi::class)
-@JvmInline
-@JvmExposeBoxed
-@Serializable
-public value class RecurrenceRuleMonth private constructor(public val value: Int) {
-    public companion object {
-        /**
-         * Raw January value.
-         */
-        public const val JANUARY_VALUE: Int = 1
+@Serializable(RecurrenceRuleMonthSerializer::class)
+public enum class RecurrenceRuleMonth(public val value: Int) {
+    /**
+     * January.
+     */
+    JANUARY(1),
 
-        /**
-         * Raw February value.
-         */
-        public const val FEBRUARY_VALUE: Int = 2
+    /**
+     * February.
+     */
+    FEBRUARY(2),
 
-        /**
-         * Raw March value.
-         */
-        public const val MARCH_VALUE: Int = 3
+    /**
+     * March.
+     */
+    MARCH(3),
 
-        /**
-         * Raw April value.
-         */
-        public const val APRIL_VALUE: Int = 4
+    /**
+     * April.
+     */
+    APRIL(4),
 
-        /**
-         * Raw May value.
-         */
-        public const val MAY_VALUE: Int = 5
+    /**
+     * May.
+     */
+    MAY(5),
 
-        /**
-         * Raw June value.
-         */
-        public const val JUNE_VALUE: Int = 6
+    /**
+     * June.
+     */
+    JUNE(6),
 
-        /**
-         * Raw July value.
-         */
-        public const val JULY_VALUE: Int = 7
+    /**
+     * July.
+     */
+    JULY(7),
 
-        /**
-         * Raw August value.
-         */
-        public const val AUGUST_VALUE: Int = 8
+    /**
+     * August.
+     */
+    AUGUST(8),
 
-        /**
-         * Raw September value.
-         */
-        public const val SEPTEMBER_VALUE: Int = 9
+    /**
+     * September.
+     */
+    SEPTEMBER(9),
 
-        /**
-         * Raw October value.
-         */
-        public const val OCTOBER_VALUE: Int = 10
+    /**
+     * October.
+     */
+    OCTOBER(10),
 
-        /**
-         * Raw November value.
-         */
-        public const val NOVEMBER_VALUE: Int = 11
+    /**
+     * November.
+     */
+    NOVEMBER(11),
 
-        /**
-         * Raw December value.
-         */
-        public const val DECEMBER_VALUE: Int = 12
+    /**
+     * December.
+     */
+    DECEMBER(12)
+}
 
+/**
+ * A serializer for the [RecurrenceRuleMonth] enum, which represents a month in a scheduled event recurrence rule.
+ *
+ * This serializer handles the mapping between the [RecurrenceRuleMonth] object and its integer representation as defined by Discord's API.
+ * It ensures that only valid month values (1 through 12) are serializable and deserializable.
+ *
+ * - During serialization, the [RecurrenceRuleMonth] is encoded as an integer corresponding to its `value` property.
+ * - During deserialization, the integer value is validated to ensure it represents a valid month. If the value is invalid,
+ *   a [SerializationException] is thrown.
+ *
+ * Throws:
+ * - [SerializationException] if a deserialized value is outside the valid range of 1 to 12.
+ */
+internal object RecurrenceRuleMonthSerializer : KSerializer<RecurrenceRuleMonth> {
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("RecurrenceRuleMonth", PrimitiveKind.INT)
 
-        /**
-         * January.
-         */
-        @JvmStatic @get:JvmExposeBoxed public val January: RecurrenceRuleMonth = RecurrenceRuleMonth(JANUARY_VALUE)
-        /**
-         * February.
-         */
-        @JvmStatic @get:JvmExposeBoxed public val February: RecurrenceRuleMonth = RecurrenceRuleMonth(FEBRUARY_VALUE)
-        /**
-         * March.
-         */
-        @JvmStatic @get:JvmExposeBoxed public val March: RecurrenceRuleMonth = RecurrenceRuleMonth(MARCH_VALUE)
-        /**
-         * April.
-         */
-        @JvmStatic @get:JvmExposeBoxed public val April: RecurrenceRuleMonth = RecurrenceRuleMonth(APRIL_VALUE)
-        /**
-         * May.
-         */
-        @JvmStatic @get:JvmExposeBoxed public val May: RecurrenceRuleMonth = RecurrenceRuleMonth(MAY_VALUE)
-        /**
-         * June.
-         */
-        @JvmStatic @get:JvmExposeBoxed public val June: RecurrenceRuleMonth = RecurrenceRuleMonth(JUNE_VALUE)
-        /**
-         * July.
-         */
-        @JvmStatic @get:JvmExposeBoxed public val July: RecurrenceRuleMonth = RecurrenceRuleMonth(JULY_VALUE)
-        /**
-         * August.
-         */
-        @JvmStatic @get:JvmExposeBoxed public val August: RecurrenceRuleMonth = RecurrenceRuleMonth(AUGUST_VALUE)
-        /**
-         * September.
-         */
-        @JvmStatic @get:JvmExposeBoxed public val September: RecurrenceRuleMonth = RecurrenceRuleMonth(SEPTEMBER_VALUE)
-        /**
-         * October.
-         */
-        @JvmStatic @get:JvmExposeBoxed public val October: RecurrenceRuleMonth = RecurrenceRuleMonth(OCTOBER_VALUE)
-        /**
-         * November.
-         */
-        @JvmStatic @get:JvmExposeBoxed public val November: RecurrenceRuleMonth = RecurrenceRuleMonth(NOVEMBER_VALUE)
-        /**
-         * December.
-         */
-        @JvmStatic @get:JvmExposeBoxed public val December: RecurrenceRuleMonth = RecurrenceRuleMonth(DECEMBER_VALUE)
-
-        /**
-         * Creates a month from a raw Discord value.
-         */
-        @JvmStatic
-        @JvmExposeBoxed
-        public fun of(value: Int): RecurrenceRuleMonth = RecurrenceRuleMonth(value)
+    override fun serialize(encoder: Encoder, value: RecurrenceRuleMonth) {
+        encoder.encodeInt(value.value)
     }
 
-    override fun toString(): String = "RecurrenceRuleMonth(value=$value)"
+    override fun deserialize(decoder: Decoder): RecurrenceRuleMonth {
+        val value = decoder.decodeInt()
+        if (value !in 1..12) {
+            throw SerializationException("Invalid RecurrenceRuleMonth value: $value")
+        }
+        return RecurrenceRuleMonth.entries[value - 1]
+    }
 }
